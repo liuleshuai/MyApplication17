@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.a67017.myapplication">
+
+    <meta-data
+        android:name="UMENG_CHANNEL"
+        android:value="${UMENG_CHANNEL_VALUE}" />
+
+    <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 外部存储读权限，调试工具加载本地补丁需要 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:hardwareAccelerated="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/appName"
+        android:supportsRtl="true"
+        android:theme="@style/NoTitle"
+        tools:replace="android:label">
+        <meta-data
+            android:name="com.taobao.android.hotfix.IDSECRET"
+            android:value="24745023-1" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.APPSECRET"
+            android:value="ad2e96b8ccf494687b25d24399cbbf8a" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.RSASECRET"
+            android:value="MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCx88DrmiLn28pi5mRPXnp2ggm4TsTMPO/DM/e4CgieP6ueo57HHjgFTS2QR4u7E24T0AdVbVOrREtXQDI43cMkPhT1BGAfTjsDFibeX7k6RTflFlDxVSMKxFjwZVYwfswoPyxjdHg7VFdvsMY3hlZ4U/1VB1wbd27qWJJ8OrFhMh5hPmAb96OKCnH0435vSyxZ5EuBC6l25MBz3XBm+U0R8Gn/04/H6896M0l08IqBSZ5JzwgHZEwgbIz7UeO2IaKgk0NtYpB7CXDf/+Wsbz47k3mJ28y6TenzgpEQszaQFTHBt+8rwr7MBWR/EWRY2NPnQaAyzwxzL8BYZWPLgmCtAgMBAAECggEBAIFb+Z0LYl579waoBrlvq8RkSV6S3BrAHWcgau59VMB89mwO80g6Hm00KnAcomXu/PEoI3ylSdJRhhc6EogmJUo+Wwu2D44SV3Gp871phoPmd3hwHY0h36RfEWxHrjz4n76OFd2CeDhg2mLV9XG9lTRJkfnyrLFGw/lVQ79NB07oYoQDGssFeXXUyEeisj2MPd7bOqFfWfNZXkKu3g4uQ6PVqpjpYo+P/wUNPoW92aZnkOAFrz80vpf+5mPHguDy2lpZCplwL0am+R3jUCjpqQjxA8ZlNeZGYyjT/+DkJYw4zPgF5J/Vsu/dy/hNzumM/C8rg4JnzGxyGSZqyoliFH0CgYEA3cv0agqj887E88W7b72Ww044Y8ea0bn5XCgO0lPX+70XXM0XW3zTqY+osUZ5oYjEQAAUPxNrQIMRcq0iG4KFUtm5CZ/bwdADAZCKlwy0kfr+sjM4uiN7neNuF42/TUg/VmnN0xbxNP9/8ZBYO2mnrOEQ2Mz3JP3ouGaslJJq2PMCgYEAzWTpwpPx7yHQJpPRnTx9TtgBKgvp6W3g7n9ayCeO/gUSJfYuWJo+SqeaHDACk5hKb3Voce3te41KsKBF6tu9IwkmGwgOYJ/jzb7T2p/er73oVqXoRBDhJw9AaP/RM4kL7JaHC5opJkBZWA25bWr/nugZtktZqjWakera2HmsR98CgYAmSjmNvPyE8KNLuk0bg01ttilCAImXv1VvNXMpmFPnH8PSv41SvAAGe8iRoisJWgUXT2wvX3jakEYI2B7VRPkjTncFVFWp5fE+6ecjIIxjz0L9HJ6kc8+5eDPfWRc3jktw7Z8c3A8UKS+7UkIJL7pEvC4eX3QjLLpqaz9L/uL3RQKBgF8YdN6A7wffqObjk65wHjhN7CQShgdstzLVRivbnOnhYSiwVX7yUxrvhHu+gsLhRL1cJ7JwDX8hyM4ENrrpaCV7i+gCD94OyUMuMhpL4KePjq3nfKVfB0+1UQYMQ0jQD/RHMVle0+SA8JzDJfISEy34mkb7lhUnYlxi11ZY5zoTAoGABKLQL1qfcU6q81aevJG7SBupnxr8membS4kT9fpJX0fPikw/Rl9QxNXgFO6TeMtSU2Tu0ZIZnfrOV++73/epFsgCpnDQWMayUsjaoydS+w5d6e6O1V50hOg3LVTuypOvs7Qrlh7JIsrJs0NL389uVXAKphUyldMSRWDO7GOz6so=" />
+
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.Main2Activity" />
+        <activity android:name=".activity.Main3Activity" />
+        <activity android:name=".activity.Main4Activity" />
+        <activity
+            android:name=".activity.Main5Activity"
+            android:theme="@style/NoTitle" />
+        <activity
+            android:name=".activity.Main6Activity"
+            android:theme="@style/NoTitle" />
+        <activity android:name=".activity.Main7Activity" />
+        <activity android:name=".activity.Main8Activity" />
+        <activity android:name=".activity.Main9Activity" />
+        <activity
+            android:name=".activity.Main10Activity"
+            android:theme="@style/TransparentTheme" />
+        <activity android:name=".activity.Main11Activity" />
+        <activity
+            android:name=".activity.Main12Activity"
+            android:theme="@style/MyTheme" />
+        <activity android:name=".activity.Main13Activity" />
+    </application>
+
+</manifest>

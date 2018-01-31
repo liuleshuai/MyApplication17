@@ -1,0 +1,24 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.a67017.myapplication.fragment.Fragment3">
+
+<!--    <com.example.a67017.myapplication.customeview.PathView
+        android:id="@+id/path_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <com.example.a67017.myapplication.customeview.PathView2
+        android:id="@+id/view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true" />-->
+
+    <com.example.a67017.myapplication.customeview.PathView3
+        android:id="@+id/view2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true" />
+</RelativeLayout>

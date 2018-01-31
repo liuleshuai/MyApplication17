@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context="com.example.a67017.myapplication.fragment.Fragment6">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/old_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="导入" />
+
+        <ImageView
+            android:id="@+id/old_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/colorAccent"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/text_old"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/new_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="压缩" />
+
+        <ImageView
+            android:id="@+id/new_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/colorPrimary"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/text_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="" />
+    </LinearLayout>
+
+</LinearLayout>

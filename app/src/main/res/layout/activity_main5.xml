@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main5"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.a67017.myapplication.activity.Main5Activity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        <!--        <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:minHeight="?attr/actionBarSize"
+                    android:gravity="bottom"
+                    app:titleTextColor="#ffffff"
+                    app:layout_scrollFlags="scroll|snap"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />-->
+        <!--scroll|enterAlways|enterAlwaysCollapsed-->
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.example.a67017.myapplication.customeview.CustomSwitchCompat
+                android:id="@+id/switch_compat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="曼城本赛季战力惊人，目前已经在英超中取得了18连胜。一时间，很多人把曼城同时视为欧冠冠军大热门。那么瓜迪奥拉是如何看待曼城欧冠前景的呢？在被问及哪支球队是欧冠最大热门时，瓜迪奥拉表示：“梅西现在在哪支球队踢球？他效力的球队才是欧冠大热门。”瓜迪奥拉在花式吹梅西的同时，也指出巴萨才是本赛季欧冠的大热门。"
+                android:textSize="40sp" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>
