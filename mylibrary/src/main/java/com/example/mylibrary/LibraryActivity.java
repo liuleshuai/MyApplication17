@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 
-@Route(path = "/activity/library")
+@Route(path = "/libraryActivity/library")
 public class LibraryActivity extends AppCompatActivity {
 
     @Override

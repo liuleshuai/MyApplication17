@@ -173,13 +173,13 @@ public class Fragment16 extends Fragment {
         activityList.add("/activity/4", "webView浏览器");
         activityList.add("/activity/5", "联动Toolbar");
         activityList.add("/activity/6", "联动+侧边");
-//        activityList.add("/activity/7", "DataBinding");
+        activityList.add("/activity/7", "DataBinding");
         activityList.add("/activity/8", "Drag");
         activityList.add("/activity/9", "Drag2");
         activityList.add("/activity/10", "Drag3");
         activityList.add("/activity/11", "拍照");
         activityList.add("/activity/12", "活动动画");
-//        activityList.add("/activity/library", "library");
+        activityList.add("/libraryActivity/library", "library");
     }
 
     @Override

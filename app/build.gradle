@@ -28,6 +28,12 @@ android {
         renderscriptSupportModeEnabled true
 
         multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
     }
 
     productFlavors {
@@ -96,7 +102,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.android.support:design:26.0.0-alpha1'
     compile 'com.jakewharton:butterknife:8.8.1'
-    compile 'com.jakewharton:butterknife-compiler:8.8.1'
+    annotationProcessor  'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.android.support:support-v4:26.0.0-alpha1'
     compile 'com.squareup.okhttp3:okhttp:3.3.0'
     compile 'top.zibin:Luban:latest.integration'
@@ -127,5 +133,6 @@ dependencies {
     //RxBinding
     compile 'com.jakewharton.rxbinding:rxbinding:latest.integration'
     // 添加MultiDex支持库的依赖
-    compile 'com.android.support:multidex:1.0.0'
+    compile 'com.android.support:multidex:1.0.1'
+    annotationProcessor 'com.alibaba:arouter-compiler:latest.integration'
 }
