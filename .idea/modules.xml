@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MyApplication17.iml" filepath="$PROJECT_DIR$/MyApplication17.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
       <module fileurl="file://$PROJECT_DIR$/leakcanary-analyzer/leakcanary-analyzer.iml" filepath="$PROJECT_DIR$/leakcanary-analyzer/leakcanary-analyzer.iml" />
       <module fileurl="file://$PROJECT_DIR$/leakcanary-android/leakcanary-android.iml" filepath="$PROJECT_DIR$/leakcanary-android/leakcanary-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/leakcanary-android-no-op/leakcanary-android-no-op.iml" filepath="$PROJECT_DIR$/leakcanary-android-no-op/leakcanary-android-no-op.iml" />

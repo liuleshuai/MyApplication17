@@ -1,12 +1,12 @@
 package com.example.a67017.myapplication;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.common.BaseApplication;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
@@ -21,7 +21,7 @@ import com.taobao.sophix.listener.PatchLoadStatusListener;
  * @author 67017
  */
 
-public class MyApplication extends Application {
+public class MyApplication extends BaseApplication {
     private RefWatcher refWatcher;
     private static MyApplication instance;
     private String tag = "LK";
