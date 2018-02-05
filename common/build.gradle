@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion rootProject.ext.android["externalCompileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["externalBuildToolsVersion"]
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.android["externalMinSdkVersion"]
+        targetSdkVersion rootProject.ext.android["externalTargetSdkVersion"]
         versionCode 1
         versionName "1.0"
 
@@ -26,6 +26,33 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
+    compile "com.android.support:appcompat-v7:${rootProject.ext.android["androidSupportVersion"]}"
     testCompile 'junit:junit:4.12'
+
+    compile 'com.squareup.okhttp3:okhttp:3.3.0'
+    compile 'top.zibin:Luban:latest.integration'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:latest.integration'
+    //高斯模糊
+    compile 'com.github.pinguo-zhouwei:EasyBlur:v1.0.0'
+    //retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    //下面两个是RxJava 和RxAndroid
+    compile 'io.reactivex:rxjava:1.1.0'
+    //用于 Android 开发，添加了 Android 用的接口
+    compile 'io.reactivex:rxandroid:1.1.0'
+    //转换器，请求结果转换成Model
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    //配合Rxjava 使用
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+    //RxBinding
+    compile 'com.jakewharton.rxbinding:rxbinding:latest.integration'
+    //Log打印
+    compile 'com.orhanobut:logger:latest.integration'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.alibaba:fastjson:latest.integration'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    compile 'com.aliyun.ams:alicloud-android-hotfix:3.1.8'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 }

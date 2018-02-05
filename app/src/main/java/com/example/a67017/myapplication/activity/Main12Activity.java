@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.a67017.myapplication.R;
@@ -29,7 +30,12 @@ public class Main12Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main12);
         ButterKnife.bind(this);
-        activityShow();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            Toast.makeText(Main12Activity.this, "手机版本过低！", Toast.LENGTH_SHORT).show();
+            Main12Activity.this.finish();
+        } else {
+            activityShow();
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

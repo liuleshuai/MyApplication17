@@ -1,6 +1,7 @@
 package com.example.a67017.myapplication.retrofit;
 
 import com.example.a67017.myapplication.bean.MovieEntity;
+import com.example.a67017.myapplication.bean.TestBean;
 import com.example.a67017.myapplication.bean.WeatherEntity;
 
 import java.util.List;
@@ -40,6 +41,11 @@ public class RetrofitLoader {
 
     public Observable<WeatherEntity> getHeWeather(String location, String key) {
         Observable observable = observe(retrofitService.getHeFengWeather(location, key));
+        return observable;
+    }
+
+    public Observable<TestBean> getInfor() {
+        Observable observable = observe(retrofitService.getInfor());
         return observable;
     }
 

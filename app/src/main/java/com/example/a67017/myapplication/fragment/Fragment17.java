@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.example.a67017.myapplication.R;
 import com.example.a67017.myapplication.bean.MovieEntity;
+import com.example.a67017.myapplication.bean.TestBean;
 import com.example.a67017.myapplication.bean.WeatherEntity;
 import com.example.a67017.myapplication.retrofit.RetrofitLoader;
 import com.example.a67017.myapplication.retrofit.RetrofitUrl;
@@ -87,7 +88,8 @@ public class Fragment17 extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 //        getMovie();
-        getWeather();
+//        getWeather();
+        getInfor();
     }
 
     private void getMovie() {
@@ -122,6 +124,23 @@ public class Fragment17 extends Fragment {
                         Log.e("TAG", "error message:" + throwable.getMessage());
                     }
                 });
+    }
+
+    public void getInfor() {
+        RetrofitLoader inforLoader = new RetrofitLoader(RetrofitUrl.BASE_WEATHER_URL);
+        inforLoader.getInfor().subscribe(new Action1<TestBean>() {
+            @Override
+            public void call(TestBean testBean) {
+                String s = JSON.toJSONString(testBean);
+                tv.setText(s);
+            }
+        }, new Action1<Throwable>() {
+            @Override
+            public void call(Throwable throwable) {
+                Log.e("TAG", "error message:" + throwable.getMessage());
+            }
+        });
+
     }
 
     @Override

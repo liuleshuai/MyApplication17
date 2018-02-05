@@ -4,6 +4,7 @@
 
     <application android:supportsRtl="true">
         <activity android:name=".LibraryActivity" />
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>

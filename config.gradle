@@ -1,0 +1,12 @@
+ext {
+    android = [
+            externalCompileSdkVersion: 26,
+            externalBuildToolsVersion: "26.0.2",
+            externalMinSdkVersion    : 16,
+            externalTargetSdkVersion : 26,
+
+            androidSupportVersion: "26.0.0-alpha1"
+    ]
+
+//    externalAppcompatV7 = "com.android.support:appcompat-v7:26.0.0-alpha1"
+}
