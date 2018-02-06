@@ -1,7 +1,6 @@
 package com.example.a67017.myapplication.tool;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
-
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -31,8 +30,8 @@ public class MyThreadPool {
         //虽然maximumPoolSize用不到，但是需要赋值，否则报错
         maximumPoolSize = corePoolSize;
         //创建线程的工厂
-        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("pool-%d").build();
-        //        ThreadFactory threadFactory = Executors.defaultThreadFactory();
+//        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat("pool-%d").build();
+        ThreadFactory threadFactory = Executors.defaultThreadFactory();
         mThreadPoolExecutor = new ThreadPoolExecutor(
                 corePoolSize, //当某个核心任务执行完毕，会依次从缓冲队列中取出等待任务
                 maximumPoolSize, //5,先corePoolSize,然后new LinkedBlockingQueue<Runnable>(),然后maximumPoolSize,但是它的数量是包含了corePoolSize的
