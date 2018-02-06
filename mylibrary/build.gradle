@@ -56,4 +56,7 @@ dependencies {
     compile 'com.alibaba:arouter-api:latest.integration'
     annotationProcessor 'com.alibaba:arouter-compiler:latest.integration'
     compile project(':common')
+    //权限
+    compile 'com.github.hotchemi:permissionsdispatcher:latest.integration'
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:latest.integration'
 }

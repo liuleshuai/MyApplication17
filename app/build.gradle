@@ -112,4 +112,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //路由
     annotationProcessor 'com.alibaba:arouter-compiler:latest.integration'
+    //权限
+    compile 'com.github.hotchemi:permissionsdispatcher:latest.integration'
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:latest.integration'
 }
