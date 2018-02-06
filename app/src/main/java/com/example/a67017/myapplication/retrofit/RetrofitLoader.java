@@ -40,7 +40,8 @@ public class RetrofitLoader {
     }
 
     public Observable<WeatherEntity> getHeWeather(String location, String key) {
-        Observable observable = observe(retrofitService.getHeFengWeather(location, key));
+//        Observable observable = observe(retrofitService.getHeFengWeather(location, key));
+        Observable observable = retrofitService.getHeFengWeather(location, key).compose(this.toMain());
         return observable;
     }
 
@@ -52,5 +53,15 @@ public class RetrofitLoader {
     public <T> Observable<T> observe(Observable<T> observable) {
         return observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public <T> Observable.Transformer<T, T> toMain() {
+        return new Observable.Transformer<T, T>() {
+            @Override
+            public Observable<T> call(Observable<T> tObservable) {
+                return tObservable.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+            }
+        };
     }
 }
