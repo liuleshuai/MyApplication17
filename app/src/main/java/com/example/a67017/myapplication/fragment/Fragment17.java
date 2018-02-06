@@ -88,8 +88,8 @@ public class Fragment17 extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 //        getMovie();
-//        getWeather();
-        getInfor();
+        getWeather();
+//        getInfor();
     }
 
     private void getMovie() {
