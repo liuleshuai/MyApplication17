@@ -22,6 +22,11 @@ import android.widget.LinearLayout;
 public class StatusBarUtils {
 
 
+    /**
+     * @param activity       上下文
+     * @param color          颜色
+     * @param statusBarAlpha 0 - 255
+     */
     public static void setColor(Activity activity, @ColorInt int color, int statusBarAlpha) {
         //先设置的全屏模式,隐藏状态栏
         setFullScreen(activity);
@@ -36,6 +41,12 @@ public class StatusBarUtils {
         //获取windowphone下的decorView
         ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
         int count = decorView.getChildCount();
+        if (decorView.getChildAt(0) instanceof LinearLayout) {
+            Log.d("LK", "LinearLayout");
+        }
+        if (decorView.getChildAt(0) instanceof StatusBarView) {
+            Log.d("LK", "StatusBarView");
+        }
         //判断是否已经添加了statusBarView
         if (count > 0 && decorView.getChildAt(count - 1) instanceof StatusBarView) {
             decorView.getChildAt(count - 1).setBackgroundColor(calculateStatusColor(color, statusBarAlpha));

@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         init();
+//        StatusBarUtils.setColor(this, Color.BLUE, 1);
     }
 
     private void init() {

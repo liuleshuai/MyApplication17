@@ -179,6 +179,7 @@ public class Fragment16 extends Fragment {
         activityList.add("/activity/10", "Drag3");
         activityList.add("/activity/11", "拍照");
         activityList.add("/activity/12", "活动动画");
+        activityList.add("/activity/13", "Android枚举");
         activityList.add("/libraryActivity/library", "library");
     }
 
