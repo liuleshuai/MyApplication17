@@ -1,13 +1,18 @@
 package com.example.a67017.myapplication.fragment;
 
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.a67017.myapplication.R;
 import com.example.a67017.myapplication.customeview.CameraSurfaceView;
@@ -15,6 +20,12 @@ import com.example.a67017.myapplication.customeview.CameraSurfaceView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.OnNeverAskAgain;
+import permissions.dispatcher.OnPermissionDenied;
+import permissions.dispatcher.OnShowRationale;
+import permissions.dispatcher.PermissionRequest;
+import permissions.dispatcher.RuntimePermissions;
 
 
 /**
@@ -22,6 +33,7 @@ import butterknife.Unbinder;
  *
  * @author 67017
  */
+@RuntimePermissions
 public class Fragment5 extends Fragment {
 
     @BindView(R.id.btn_switch_camera)
@@ -74,7 +86,7 @@ public class Fragment5 extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        mSurfaceView.start();
+        Fragment5PermissionsDispatcher.successPermissionWithPermissionCheck(this);
     }
 
     @Override
@@ -90,5 +102,43 @@ public class Fragment5 extends Fragment {
             mSurfaceView.releaseCamera();
         }
         unbinder.unbind();
+    }
+
+    @NeedsPermission({Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    void successPermission() {
+        mSurfaceView.start();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Fragment5PermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
+    }
+
+    @OnShowRationale({Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    void onShowRationale(final PermissionRequest request) {
+        new AlertDialog.Builder(getActivity())
+                .setMessage("申请权限")
+                .setPositiveButton("好的", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        request.proceed();
+                    }
+                }).setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                request.cancel();
+            }
+        }).show();
+    }
+
+    @OnPermissionDenied({Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    void deniedPermission() {
+        Toast.makeText(getActivity(), "已拒绝权限申请！", Toast.LENGTH_SHORT).show();
+    }
+
+    @OnNeverAskAgain({Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE})
+    void neverAskAgain() {
+        Toast.makeText(getActivity(), "不在询问权限申请！", Toast.LENGTH_SHORT).show();
     }
 }
