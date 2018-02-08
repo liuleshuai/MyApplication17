@@ -2,47 +2,45 @@ package com.example.a67017.myapplication.fragment;
 
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.a67017.myapplication.R;
 import com.example.a67017.myapplication.customeview.CameraSurfaceView;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import permissions.dispatcher.NeedsPermission;
-import permissions.dispatcher.OnNeverAskAgain;
-import permissions.dispatcher.OnPermissionDenied;
-import permissions.dispatcher.OnShowRationale;
-import permissions.dispatcher.PermissionRequest;
-import permissions.dispatcher.RuntimePermissions;
-
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 /**
  * A simple {@link Fragment} subclass.
  *
  * @author 67017
  */
-@RuntimePermissions
 public class Fragment5 extends Fragment {
 
     @BindView(R.id.btn_switch_camera)
     Button mSwitchCamera;
     @BindView(R.id.btn_capture)
     Button mCapture;
-    @BindView(R.id.sv_camera)
-    CameraSurfaceView mSurfaceView;
+    @BindView(R.id.ll)
+    LinearLayout ll;
+    @BindView(R.id.layout)
+    RelativeLayout layout;
     Unbinder unbinder;
+    CameraSurfaceView mSurfaceView;
+    RxPermissions rxPermissions;
 
     public Fragment5() {
         // Required empty public constructor
@@ -60,13 +58,32 @@ public class Fragment5 extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        rxPermissions = new RxPermissions(getActivity());
+        rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE)
+                .subscribe(new Consumer<Boolean>() {
+                    @Override
+                    public void accept(@NonNull Boolean granted) throws Exception {
+                        if (granted) {
+                            init();
+                        } else {
+                            Toast.makeText(getActivity(), "获取权限失败！", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    private void init() {
+        mSurfaceView = new CameraSurfaceView(getActivity());
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        params.addRule(RelativeLayout.BELOW, R.id.ll);
+        layout.addView(mSurfaceView, params);
+
         mSurfaceView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mSurfaceView.autoFocus();
             }
         });
-
 
         mSwitchCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,18 +98,23 @@ public class Fragment5 extends Fragment {
                 mSurfaceView.capture(v);
             }
         });
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Fragment5PermissionsDispatcher.successPermissionWithPermissionCheck(this);
+        if (mSurfaceView != null) {
+            mSurfaceView.start();
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mSurfaceView.releaseCamera();
+        if (mSurfaceView != null) {
+            mSurfaceView.releaseCamera();
+        }
     }
 
     @Override
@@ -102,43 +124,5 @@ public class Fragment5 extends Fragment {
             mSurfaceView.releaseCamera();
         }
         unbinder.unbind();
-    }
-
-    @NeedsPermission({Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void successPermission() {
-        mSurfaceView.start();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Fragment5PermissionsDispatcher.onRequestPermissionsResult(this, requestCode, grantResults);
-    }
-
-    @OnShowRationale({Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void onShowRationale(final PermissionRequest request) {
-        new AlertDialog.Builder(getActivity())
-                .setMessage("申请权限")
-                .setPositiveButton("好的", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        request.proceed();
-                    }
-                }).setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                request.cancel();
-            }
-        }).show();
-    }
-
-    @OnPermissionDenied({Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void deniedPermission() {
-        Toast.makeText(getActivity(), "已拒绝权限申请！", Toast.LENGTH_SHORT).show();
-    }
-
-    @OnNeverAskAgain({Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE})
-    void neverAskAgain() {
-        Toast.makeText(getActivity(), "不在询问权限申请！", Toast.LENGTH_SHORT).show();
     }
 }

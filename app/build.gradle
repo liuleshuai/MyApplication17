@@ -34,18 +34,22 @@ android {
                 arguments = [moduleName: project.getName()]
             }
         }
+        //解决：Jar包里边的配置文件冲突了,AS不知道用哪个了
+        packagingOptions {
+            exclude 'META-INF/rxjava.properties'
+        }
     }
 
     productFlavors {
         default_channel {}
-        wandoujia {}
+/*        wandoujia {}
         _360 {}
         tengxun {}
         yingyongbao {}
         xiaomi {}
         baidu {}
         huawei {}
-        jifeng {}
+        jifeng {}*/
     }
 
     productFlavors.all { flavor ->
@@ -112,9 +116,8 @@ dependencies {
     //butterKnife
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     //路由
     annotationProcessor 'com.alibaba:arouter-compiler:latest.integration'
-    //权限
-    compile 'com.github.hotchemi:permissionsdispatcher:latest.integration'
-    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:latest.integration'
 }

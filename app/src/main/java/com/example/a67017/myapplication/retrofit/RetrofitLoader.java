@@ -6,10 +6,13 @@ import com.example.a67017.myapplication.bean.WeatherEntity;
 
 import java.util.List;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by LiuKuo at 2018/1/24
@@ -30,9 +33,9 @@ public class RetrofitLoader {
      * @return
      */
     public Observable<List<MovieEntity.SubjectsBean>> getMovie(int start, int count) {
-        Observable observable = observe(retrofitService.getTop250(start, count)).map(new Func1<MovieEntity, List<MovieEntity.SubjectsBean>>() {
+        Observable observable = observe(retrofitService.getTop250(start, count)).map(new Function<MovieEntity, List<MovieEntity.SubjectsBean>>() {
             @Override
-            public List<MovieEntity.SubjectsBean> call(MovieEntity movieEntity) {
+            public List<MovieEntity.SubjectsBean> apply(@NonNull MovieEntity movieEntity) throws Exception {
                 return movieEntity.getSubjects();
             }
         });
@@ -55,11 +58,11 @@ public class RetrofitLoader {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public <T> Observable.Transformer<T, T> toMain() {
-        return new Observable.Transformer<T, T>() {
+    public <T> ObservableTransformer<T, T> toMain() {
+        return new ObservableTransformer<T, T>() {
             @Override
-            public Observable<T> call(Observable<T> tObservable) {
-                return tObservable.subscribeOn(Schedulers.io())
+            public ObservableSource<T> apply(Observable<T> upstream) {
+                return upstream.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread());
             }
         };

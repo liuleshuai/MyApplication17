@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white">
@@ -33,14 +34,6 @@
                 android:gravity="center"
                 android:text="拍照" />
         </LinearLayout>
-
-        <com.example.a67017.myapplication.customeview.CameraSurfaceView
-            android:id="@+id/sv_camera"
-            android:layout_width="300dp"
-            android:layout_height="400dp"
-            android:layout_below="@id/ll"
-            android:layout_centerInParent="true"
-            android:text="camera" />
 
     </RelativeLayout>
 

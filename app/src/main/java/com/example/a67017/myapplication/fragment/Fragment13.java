@@ -24,17 +24,17 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 
 /**
@@ -55,12 +55,10 @@ public class Fragment13 extends Fragment {
     @BindView(R.id.collapsing_toolbar_layout)
     CollapsingToolbarLayout collapsingToolbarLayout;
     private Retrofit retrofit;
-    private Subscription subscription;
 
     public Fragment13() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,23 +90,19 @@ public class Fragment13 extends Fragment {
                 .client(builder.build())
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         MovieRetrofit movieRetrofit = retrofit.create(MovieRetrofit.class);
 //        Observable<MovieEntity> observable = movieRetrofit.getTopRx(0, 20);
 
-        /******    Fastjson   ********/
-        subscription = movieRetrofit.getTopRx(0, 20).subscribeOn(Schedulers.io())
+        movieRetrofit.getTopRx(0, 20).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<MovieEntity>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
+                .subscribe(new Observer<MovieEntity>() {
+                    private Disposable mDisposable;
 
                     @Override
-                    public void onError(Throwable e) {
-
+                    public void onSubscribe(Disposable d) {
+                        mDisposable = d;
                     }
 
                     @Override
@@ -118,31 +112,37 @@ public class Fragment13 extends Fragment {
                             String s = JSON.toJSONString(movieEntity);
                             tv.setText(s);
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mDisposable.dispose();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        mDisposable.dispose();
                     }
                 });
     }
 
-    private void useRetrofitRx() {
+    private void useRetrofitRxjava2() {
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         MovieRetrofit movieRetrofit = retrofit.create(MovieRetrofit.class);
 //        Observable<MovieEntity> observable = movieRetrofit.getTopRx(0, 20);
 
-        /******    Fastjson   ********/
-        subscription = movieRetrofit.getTopRx(0, 20).subscribeOn(Schedulers.io())
+        movieRetrofit.getTopRx(0, 20).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<MovieEntity>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
+                .subscribe(new Observer<MovieEntity>() {
+                    private Disposable mDisposable;
 
                     @Override
-                    public void onError(Throwable e) {
-
+                    public void onSubscribe(Disposable d) {
+                        mDisposable = d;
                     }
 
                     @Override
@@ -152,6 +152,16 @@ public class Fragment13 extends Fragment {
                             String s = JSON.toJSONString(movieEntity);
                             tv.setText(s);
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mDisposable.dispose();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        mDisposable.dispose();
                     }
                 });
     }
@@ -184,8 +194,5 @@ public class Fragment13 extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        if (subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
-        }
     }
 }

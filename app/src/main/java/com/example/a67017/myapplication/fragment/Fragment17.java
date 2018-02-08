@@ -23,7 +23,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import rx.functions.Action1;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,15 +95,15 @@ public class Fragment17 extends Fragment {
 
     private void getMovie() {
         RetrofitLoader movieLoader = new RetrofitLoader(RetrofitUrl.BASE_URL);
-        movieLoader.getMovie(0, 10).subscribe(new Action1<List<MovieEntity.SubjectsBean>>() {
+        movieLoader.getMovie(0, 10).subscribe(new Consumer<List<MovieEntity.SubjectsBean>>() {
             @Override
-            public void call(List<MovieEntity.SubjectsBean> subjectsBeen) {
+            public void accept(@NonNull List<MovieEntity.SubjectsBean> subjectsBeen) throws Exception {
                 String s = JSON.toJSONString(subjectsBeen);
                 tv.setText(s);
             }
-        }, new Action1<Throwable>() {
+        }, new Consumer<Throwable>() {
             @Override
-            public void call(Throwable throwable) {
+            public void accept(@NonNull Throwable throwable) throws Exception {
                 Log.e("TAG", "error message:" + throwable.getMessage());
             }
         });
@@ -111,16 +112,15 @@ public class Fragment17 extends Fragment {
     public void getWeather() {
         RetrofitLoader weatherLoader = new RetrofitLoader(RetrofitUrl.BASE_WEATHER_URL);
         weatherLoader.getHeWeather("beijing", "ec56e0cdd08843adacaef248e196855a").subscribe(
-                new Action1<WeatherEntity>() {
+                new Consumer<WeatherEntity>() {
                     @Override
-                    public void call(WeatherEntity weatherEntity) {
+                    public void accept(@NonNull WeatherEntity weatherEntity) throws Exception {
                         String s = JSON.toJSONString(weatherEntity);
                         tv.setText(s);
                     }
-                }
-                , new Action1<Throwable>() {
+                }, new Consumer<Throwable>() {
                     @Override
-                    public void call(Throwable throwable) {
+                    public void accept(@NonNull Throwable throwable) throws Exception {
                         Log.e("TAG", "error message:" + throwable.getMessage());
                     }
                 });
@@ -128,15 +128,15 @@ public class Fragment17 extends Fragment {
 
     public void getInfor() {
         RetrofitLoader inforLoader = new RetrofitLoader(RetrofitUrl.BASE_WEATHER_URL);
-        inforLoader.getInfor().subscribe(new Action1<TestBean>() {
+        inforLoader.getInfor().subscribe(new Consumer<TestBean>() {
             @Override
-            public void call(TestBean testBean) {
+            public void accept(@NonNull TestBean testBean) throws Exception {
                 String s = JSON.toJSONString(testBean);
                 tv.setText(s);
             }
-        }, new Action1<Throwable>() {
+        }, new Consumer<Throwable>() {
             @Override
-            public void call(Throwable throwable) {
+            public void accept(@NonNull Throwable throwable) throws Exception {
                 Log.e("TAG", "error message:" + throwable.getMessage());
             }
         });

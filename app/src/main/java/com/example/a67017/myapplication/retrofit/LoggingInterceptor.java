@@ -13,7 +13,6 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import okhttp3.internal.http.HttpEngine;
 import okio.Buffer;
 import okio.BufferedSource;
 
@@ -54,7 +53,7 @@ public class LoggingInterceptor implements Interceptor {
         ResponseBody responseBody = response.body();
         String rBody = null;
 
-        if (HttpEngine.hasBody(response)) {
+        if (response.isSuccessful()) {
             BufferedSource source = responseBody.source();
             source.request(Long.MAX_VALUE); // Buffer the entire body.
             Buffer buffer = source.buffer();

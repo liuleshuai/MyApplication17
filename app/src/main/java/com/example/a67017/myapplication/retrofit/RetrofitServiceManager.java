@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -45,8 +45,10 @@ public class RetrofitServiceManager {
         retrofit = new Retrofit.Builder()
                 .client(builder.build())
                 .baseUrl(baseUrl)
+                // 将Json结果并解析成DAO
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                // 添加RxJava2支持
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
     }
 
@@ -54,7 +56,11 @@ public class RetrofitServiceManager {
         private static RetrofitServiceManager instance;
 
         public static RetrofitServiceManager getInstance(String baseUrl) {
-            return instance = new RetrofitServiceManager(baseUrl);
+            if (instance == null) {
+                return instance = new RetrofitServiceManager(baseUrl);
+            } else {
+                return instance;
+            }
         }
     }
 

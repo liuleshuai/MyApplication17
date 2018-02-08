@@ -29,21 +29,21 @@ dependencies {
     compile "com.android.support:appcompat-v7:${rootProject.ext.android["androidSupportVersion"]}"
     testCompile 'junit:junit:4.12'
 
-    compile 'com.squareup.okhttp3:okhttp:3.3.0'
+    compile 'com.squareup.okhttp3:okhttp:3.9.1'
     compile 'top.zibin:Luban:latest.integration'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:latest.integration'
     //高斯模糊
     compile 'com.github.pinguo-zhouwei:EasyBlur:v1.0.0'
     //retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    //下面两个是RxJava 和RxAndroid
-    compile 'io.reactivex:rxjava:1.1.0'
-    //用于 Android 开发，添加了 Android 用的接口
-    compile 'io.reactivex:rxandroid:1.1.0'
+    //下面两个是RxJava2 和RxAndroid
+    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
+    //用于Android开发,拓展RxJava功能，添加了 Android 用的接口
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //转换器，请求结果转换成Model
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    //配合Rxjava 使用
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //配合retrofit使用
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
     //RxBinding
     compile 'com.jakewharton.rxbinding:rxbinding:latest.integration'
@@ -53,9 +53,6 @@ dependencies {
     compile 'com.alibaba:fastjson:latest.integration'
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'com.aliyun.ams:alicloud-android-hotfix:3.1.8'
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     //权限
-    compile 'com.github.hotchemi:permissionsdispatcher:latest.integration'
-    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:latest.integration'
+    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
 }

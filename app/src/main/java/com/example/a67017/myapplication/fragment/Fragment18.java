@@ -11,17 +11,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a67017.myapplication.R;
-import com.jakewharton.rxbinding.view.RxView;
 
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 
 /**
@@ -86,32 +86,24 @@ public class Fragment18 extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Observable observable = Observable.interval(0,5, TimeUnit.SECONDS).take(1); //限制次数
+        Observable observable = Observable.interval(0,5, TimeUnit.SECONDS).take(1); //take限制次数
 //        Observable observable = Observable.timer(5, TimeUnit.SECONDS);
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1() {
+                .subscribe(new Consumer() {
                     @Override
-                    public void call(Object o) {
+                    public void accept(@NonNull Object o) throws Exception {
                         Toast.makeText(getActivity(), "come on!baby", Toast.LENGTH_SHORT).show();
                     }
                 });
 /*        RxView.clicks(tv)
-                .throttleFirst(500,TimeUnit.MILLISECONDS)
-                .subscribe(new Action1<Void>() {  // 注意rxbinding:0.4.0，>2的不好使报错
-                    @Override
-                    public void call(Void aVoid) {
-                        Toast.makeText(getActivity(), "come on!come on!", Toast.LENGTH_SHORT).show();
-                    }
-                });*/
-        RxView.clicks(tv)
                 .throttleFirst(500,TimeUnit.MILLISECONDS)
                 .subscribe(new Action1<Void>() {
                     @Override
                     public void call(Void aVoid) {
                         Toast.makeText(getActivity(), "come on!come on!", Toast.LENGTH_SHORT).show();
                     }
-                });
+                });*/
     }
 
     @Override

@@ -2,13 +2,13 @@ package com.example.a67017.myapplication.retrofit;
 
 import com.example.a67017.myapplication.bean.MovieEntity;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
-import rx.Observable;
 
 /**
  * Created by LiuKuo at 2018/1/23
