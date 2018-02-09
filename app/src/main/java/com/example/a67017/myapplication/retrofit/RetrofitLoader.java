@@ -49,7 +49,7 @@ public class RetrofitLoader {
     }
 
     public Observable<TestBean> getInfor() {
-        Observable observable = observe(retrofitService.getInfor());
+        Observable observable = retrofitService.getInfor().compose(this.toMain());
         return observable;
     }
 

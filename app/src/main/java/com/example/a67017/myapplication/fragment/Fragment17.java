@@ -23,6 +23,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -91,8 +92,14 @@ public class Fragment17 extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 //        getMovie();
-        getWeather();
+//        getWeather();
 //        getInfor();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getInfor();
     }
 
     private void getMovie() {
@@ -129,8 +136,30 @@ public class Fragment17 extends Fragment {
     }
 
     public void getInfor() {
-        RetrofitLoader inforLoader = new RetrofitLoader(RetrofitUrl.BASE_WEATHER_URL);
-        mDisposable = inforLoader.getInfor().subscribe(new Consumer<TestBean>() {
+        RetrofitLoader inforLoader = new RetrofitLoader(RetrofitUrl.BASE_TEST);
+        inforLoader.getInfor().subscribe(new Observer<TestBean>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(TestBean testBean) {
+                String s = JSON.toJSONString(testBean);
+                tv.setText(s);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e("TAG", "error message:" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+                Log.e("TAG", "complete!");
+            }
+        });
+/*        new Consumer<TestBean>() {
             @Override
             public void accept(@NonNull TestBean testBean) throws Exception {
                 String s = JSON.toJSONString(testBean);
@@ -141,7 +170,7 @@ public class Fragment17 extends Fragment {
             public void accept(@NonNull Throwable throwable) throws Exception {
                 Log.e("TAG", "error message:" + throwable.getMessage());
             }
-        });
+        });*/
 
     }
 

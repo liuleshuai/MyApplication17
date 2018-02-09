@@ -30,6 +30,6 @@ public interface RetrofitService {
     Observable<WeatherEntity> getHeFengWeather(@Query("location") String location, @Query("key") String key);
 
     //测试
-    @GET("test")
+    @GET("lk")
     Observable<TestBean> getInfor();
 }
