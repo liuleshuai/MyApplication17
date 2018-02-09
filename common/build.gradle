@@ -12,6 +12,11 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
     }
     buildTypes {
         release {
@@ -45,14 +50,21 @@ dependencies {
     //配合retrofit使用
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
-    //RxBinding
-    compile 'com.jakewharton.rxbinding:rxbinding:latest.integration'
+    //RxBinding（支持RxJava2的版本）
+    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.0.0'
     //Log打印
     compile 'com.orhanobut:logger:latest.integration'
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.alibaba:fastjson:latest.integration'
     compile 'com.umeng.analytics:analytics:latest.integration'
     compile 'com.aliyun.ams:alicloud-android-hotfix:3.1.8'
+    //路由
+    compile 'com.alibaba:arouter-api:latest.integration'
+    annotationProcessor 'com.alibaba:arouter-compiler:latest.integration'
     //权限
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
 }

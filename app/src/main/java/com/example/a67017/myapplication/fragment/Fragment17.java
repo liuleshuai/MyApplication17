@@ -24,6 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -43,6 +44,7 @@ public class Fragment17 extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private Disposable mDisposable;
 
 
     public Fragment17() {
@@ -128,7 +130,7 @@ public class Fragment17 extends Fragment {
 
     public void getInfor() {
         RetrofitLoader inforLoader = new RetrofitLoader(RetrofitUrl.BASE_WEATHER_URL);
-        inforLoader.getInfor().subscribe(new Consumer<TestBean>() {
+        mDisposable = inforLoader.getInfor().subscribe(new Consumer<TestBean>() {
             @Override
             public void accept(@NonNull TestBean testBean) throws Exception {
                 String s = JSON.toJSONString(testBean);
@@ -147,5 +149,8 @@ public class Fragment17 extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        if (mDisposable != null && !mDisposable.isDisposed()) {
+            mDisposable.dispose();
+        }
     }
 }

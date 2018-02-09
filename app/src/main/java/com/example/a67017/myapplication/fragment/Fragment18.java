@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a67017.myapplication.R;
+import com.jakewharton.rxbinding2.view.RxView;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +19,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
@@ -86,29 +89,39 @@ public class Fragment18 extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Observable observable = Observable.interval(0,5, TimeUnit.SECONDS).take(1); //take限制次数
+        Observable observable = Observable.interval(0, 5, TimeUnit.SECONDS).take(1); //take限制次数
 //        Observable observable = Observable.timer(5, TimeUnit.SECONDS);
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer() {
+        observable.compose(this.toMain())
+                .subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(@NonNull Object o) throws Exception {
                         Toast.makeText(getActivity(), "come on!baby", Toast.LENGTH_SHORT).show();
                     }
                 });
-/*        RxView.clicks(tv)
-                .throttleFirst(500,TimeUnit.MILLISECONDS)
-                .subscribe(new Action1<Void>() {
+
+        RxView.clicks(tv)
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
+                .subscribe(new Consumer<Object>() {
                     @Override
-                    public void call(Void aVoid) {
-                        Toast.makeText(getActivity(), "come on!come on!", Toast.LENGTH_SHORT).show();
+                    public void accept(@NonNull Object o) throws Exception {
+                        Toast.makeText(getActivity(), "come on!baby", Toast.LENGTH_SHORT).show();
                     }
-                });*/
+                });
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    public <T> ObservableTransformer<T, T> toMain() {
+        return new ObservableTransformer<T, T>() {
+            @Override
+            public ObservableSource<T> apply(Observable<T> upstream) {
+                return upstream.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread());
+            }
+        };
     }
 }
