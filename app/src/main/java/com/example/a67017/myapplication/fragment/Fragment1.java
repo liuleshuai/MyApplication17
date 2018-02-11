@@ -6,6 +6,7 @@ import android.animation.PropertyValuesHolder;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,6 +59,8 @@ public class Fragment1 extends Fragment {
         } else {
             Toast.makeText(getActivity(), "not debug!", Toast.LENGTH_SHORT).show();
         }*/
+        int layoutId = getResources().getIdentifier("activity_main", "layout", getActivity().getPackageName());
+        Log.d("LK", "----> 获取到的资源 layoutId = " + layoutId);
         return view;
     }
 

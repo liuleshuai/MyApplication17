@@ -10,7 +10,7 @@ import java.lang.reflect.Constructor;
  * Created by 67017 on 2017/11/21.
  */
 
-public class text1 {
+public class Test1 {
 
     public static void main(String[] args) {
         try {

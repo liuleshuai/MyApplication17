@@ -9,7 +9,7 @@ import java.util.Locale;
  * Created by 67017 on 2017/12/26.
  */
 
-public class test3 {
+public class Test3 {
     public static void main(String[] args) throws ParseException {
         String ss = "2017-3-08";
         String a = getFormatDate(ss, "yyyyMMdd");

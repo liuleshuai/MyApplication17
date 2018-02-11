@@ -5,7 +5,7 @@ package com.example.a67017.myapplication.main;
  * @date 2017/12/25
  */
 
-public class test2 {
+public class Test2 {
     public static void main(String[] args) {
         String s = "12345";
         String a = s.substring(4);
