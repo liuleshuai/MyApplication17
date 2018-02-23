@@ -58,8 +58,52 @@ public class StatusBarUtils {
         setRootView(activity);
     }
 
+    /**
+     * 沉浸式状态栏，并设置相关控件marginTop一个状态栏的高度
+     *
+     * @param activity
+     * @param alpha
+     * @param needOffsetView
+     */
     public static void setTranslucentStatusBar(Activity activity, int alpha, View needOffsetView) {
         setFullScreen(activity);
+        changeStatusBarView(activity, alpha);
+        marginOffsetView(activity, needOffsetView);
+    }
+
+    /**
+     * 沉浸式状态栏，并设置相关控件paddingTop一个状态栏的高度
+     *
+     * @param activity
+     * @param alpha
+     * @param needOffsetView
+     */
+    public static void setTranslucentStatusBarPadding(Activity activity, int alpha, View needOffsetView) {
+        setFullScreen(activity);
+        changeStatusBarView(activity, alpha);
+        paddingOffsetView(activity, needOffsetView);
+    }
+
+    private static void paddingOffsetView(Activity activity, View needOffsetView) {
+        if (needOffsetView != null) {
+            needOffsetView.setPadding(0, getStatusBarHeight(activity), 0, 0);
+        }
+    }
+
+    /**
+     * 设置相关控件marginTop一个状态栏的高度
+     *
+     * @param activity
+     * @param needOffsetView
+     */
+    private static void marginOffsetView(Activity activity, View needOffsetView) {
+        if (needOffsetView != null) {
+            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) needOffsetView.getLayoutParams();
+            layoutParams.setMargins(0, getStatusBarHeight(activity), 0, 0);
+        }
+    }
+
+    private static void changeStatusBarView(Activity activity, int alpha) {
         //获取windowphone下的decorView
         ViewGroup decorView = (ViewGroup) activity.getWindow().getDecorView();
         int count = decorView.getChildCount();
@@ -77,12 +121,6 @@ public class StatusBarUtils {
             StatusBarView statusView = createTranslucentStatusBarView(activity, alpha);
             decorView.addView(statusView);
         }
-
-        if (needOffsetView != null) {
-            ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams) needOffsetView.getLayoutParams();
-            layoutParams.setMargins(0, getStatusBarHeight(activity), 0, 0);
-        }
-
     }
 
 
@@ -101,7 +139,7 @@ public class StatusBarUtils {
      */
     private static void setRootView(Activity activity) {
         ViewGroup rootView = (ViewGroup) ((ViewGroup) activity.findViewById(android.R.id.content)).getChildAt(0);
-        //rootview不会为状态栏留出状态栏空间
+        //rootview不会自动为状态栏留出状态栏空间
         ViewCompat.setFitsSystemWindows(rootView, true);
         // 默认就为true
         rootView.setClipToPadding(true);

@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.a67017.myapplication.R;
+import com.example.a67017.myapplication.tool.StatusBarUtils;
 import com.orhanobut.logger.Logger;
 
 import butterknife.BindView;
@@ -33,6 +34,7 @@ public class Main6Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main6);
         ButterKnife.bind(this);
+        StatusBarUtils.setTranslucentStatusBar(this, 0, toolbar);
         init();
     }
 

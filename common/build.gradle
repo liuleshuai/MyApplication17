@@ -39,6 +39,8 @@ dependencies {
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:latest.integration'
     //高斯模糊
     compile 'com.github.pinguo-zhouwei:EasyBlur:v1.0.0'
+    // 毛玻璃
+    compile 'com.github.mmin18:realtimeblurview:1.0.6'
     //retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     //下面两个是RxJava2 和RxAndroid
