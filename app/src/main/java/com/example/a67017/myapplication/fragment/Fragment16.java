@@ -173,6 +173,7 @@ public class Fragment16 extends Fragment {
         activityList.add("/activity/4", "webView浏览器");
         activityList.add("/activity/5", "联动Toolbar");
         activityList.add("/activity/6", "联动+侧边");
+        activityList.add("/activity/15", "fake联动");
         activityList.add("/activity/7", "DataBinding");
         activityList.add("/activity/8", "Drag");
         activityList.add("/activity/9", "Drag2");

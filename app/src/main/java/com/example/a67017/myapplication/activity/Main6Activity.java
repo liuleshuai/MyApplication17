@@ -49,7 +49,7 @@ public class Main6Activity extends AppCompatActivity {
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                Logger.d(appBarLayout.getTotalScrollRange());
+                Logger.d(appBarLayout.getTotalScrollRange()); // 相当于固定值
                 if (appBarLayout.getTotalScrollRange() <= Math.abs(verticalOffset)) {
                     toggle.setDrawerIndicatorEnabled(true);
                 } else {

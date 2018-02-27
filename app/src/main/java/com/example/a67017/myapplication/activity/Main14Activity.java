@@ -64,7 +64,7 @@ public class Main14Activity extends AppCompatActivity {
             }
         });
         webView.loadUrl("https://github.com/scwang90/SmartRefreshLayout");
-        // 设置返回按钮
+        // 设置返回按钮 或者 app:navigationIcon="?attr/homeAsUpIndicator"
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
