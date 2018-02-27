@@ -9,7 +9,11 @@ import android.webkit.WebViewClient;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.a67017.myapplication.R;
+import com.example.a67017.myapplication.tool.StatusBarUtils;
+import com.example.a67017.myapplication.tool.Utils;
 import com.github.mmin18.widget.RealtimeBlurView;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,14 +51,23 @@ public class Main14Activity extends AppCompatActivity {
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 return false;
             }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                view.loadUrl(String.format(Locale.CHINA,
+                        "javascript:document.body.style.paddingTop='%fpx'; void 0",
+                        (float) Utils.px2dip(Main14Activity.this, webView.getPaddingTop()
+                                + StatusBarUtils.getStatusBarHeight(Main14Activity.this))
+                ));
+            }
         });
         webView.loadUrl("https://github.com/scwang90/SmartRefreshLayout");
     }
 
 
     private void immersive() {
-/*        StatusBarUtils.setTranslucentStatusBar(this, 0, toolbar);
-        StatusBarUtils.setTranslucentStatusBar(this, 0, blurView);
-        StatusBarUtils.setTranslucentStatusBar(this, 0, webView);*/
+        StatusBarUtils.setTranslucentStatusBarPadding(this, 0, toolbar);
+        StatusBarUtils.setTranslucentStatusBarPadding(this, 0, blurView);
     }
 }

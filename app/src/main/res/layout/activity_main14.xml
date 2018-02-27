@@ -7,8 +7,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.a67017.myapplication.activity.Main14Activity">
 
-
-    <com.example.a67017.myapplication.customeview.MyWebView
+    <WebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,9 +18,8 @@
         android:id="@+id/blur_view"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:visibility="gone"
         app:realtimeBlurRadius="10dp"
-        app:realtimeOverlayColor="@color/colorPrimary" />
+        app:realtimeOverlayColor="#cc0094ff" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"

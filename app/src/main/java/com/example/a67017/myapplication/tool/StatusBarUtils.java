@@ -86,6 +86,10 @@ public class StatusBarUtils {
 
     private static void paddingOffsetView(Activity activity, View needOffsetView) {
         if (needOffsetView != null) {
+            ViewGroup.LayoutParams lp = needOffsetView.getLayoutParams();
+            if (lp != null && lp.height > 0) {
+                lp.height += getStatusBarHeight(activity);//增高
+            }
             needOffsetView.setPadding(0, getStatusBarHeight(activity), 0, 0);
         }
     }
@@ -161,7 +165,7 @@ public class StatusBarUtils {
      * @param context context
      * @return 状态栏高度
      */
-    private static int getStatusBarHeight(Context context) {
+    public static int getStatusBarHeight(Context context) {
         // 获得状态栏高度
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");
         return context.getResources().getDimensionPixelSize(resourceId);
