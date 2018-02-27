@@ -3,6 +3,7 @@ package com.example.a67017.myapplication.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -63,6 +64,15 @@ public class Main14Activity extends AppCompatActivity {
             }
         });
         webView.loadUrl("https://github.com/scwang90/SmartRefreshLayout");
+        // 设置返回按钮
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
 
