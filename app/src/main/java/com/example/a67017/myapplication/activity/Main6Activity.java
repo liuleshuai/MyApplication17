@@ -45,7 +45,8 @@ public class Main6Activity extends AppCompatActivity {
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(Main6Activity.this, drawerLayout, toolbar, 0, 0);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
+//        drawerLayout.openDrawer(Gravity.LEFT);
+//        drawerLayout.closeDrawers();
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
