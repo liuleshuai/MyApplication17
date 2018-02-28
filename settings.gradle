@@ -1,1 +1,8 @@
-include ':app', ':leakcanary-android', ':leakcanary-android-no-op', ':leakcanary-sample', ':leakcanary-analyzer', ':leakcanary-watcher', ':mylibrary', ':common'
+include ':app',
+        ':leakcanary-android',
+        ':leakcanary-android-no-op',
+        ':leakcanary-sample',
+        ':leakcanary-analyzer',
+        ':leakcanary-watcher',
+        ':extraLibrary:mylibrary',
+        ':extraLibrary:common'
