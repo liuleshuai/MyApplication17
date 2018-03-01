@@ -41,6 +41,7 @@ public class MyOkHttp {
         builder.writeTimeout(10, TimeUnit.SECONDS);
         client = builder.build();
 
+        // .get()可写可不写，默认就是GET方法
         final Request request = new Request.Builder().url(url).build();
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -67,6 +68,16 @@ public class MyOkHttp {
      */
     public static void postHttp(URL url, final ResponseListener listener) {
         OkHttpClient client = new OkHttpClient();
+
+        /**
+         * 在这里直接设置连接超时.读取超时，写入超时
+         */
+        OkHttpClient.Builder oBuilder = client.newBuilder();
+        oBuilder.connectTimeout(10, TimeUnit.SECONDS);
+        oBuilder.readTimeout(10, TimeUnit.SECONDS);
+        oBuilder.writeTimeout(10, TimeUnit.SECONDS);
+        client = oBuilder.build();
+
         FormBody.Builder builder = new FormBody.Builder();
         builder.add("type", "1");
         FormBody formBody = builder.build();

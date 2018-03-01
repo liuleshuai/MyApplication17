@@ -67,7 +67,8 @@
             android:theme="@style/NoTitle" />
         <activity
             android:name=".activity.Main15Activity"
-            android:theme="@style/NoTitle"/>
+            android:theme="@style/NoTitle" />
+        <activity android:name=".activity.Main16Activity"></activity>
     </application>
 
 </manifest>
