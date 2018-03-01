@@ -45,6 +45,8 @@ public class Main16Activity extends AppCompatActivity {
                         Toast.makeText(Main16Activity.this, "连不上网络！", Toast.LENGTH_LONG).show();
                     }
                 });
+
+
                 break;
             case R.id.button2:
                 HttpClientHelper.execute("http://172.16.96.81/eolinker_os/server/index.php?g=Web&c=Mock&o=simple&projectID=12&uri=lktest", true, null, new HttpClientHelper.HttpResult() {
