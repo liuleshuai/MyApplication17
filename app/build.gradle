@@ -110,7 +110,7 @@ dependencies {
     })
     testCompile 'junit:junit:4.12'
 //    compile project(':extraLibrary:mylibrary')
-    compile(name:'mylibrary-1.0', ext:'aar') // SDK 测试生产aar文件
+    compile(name: 'mylibrary-1.0', ext: 'aar') // SDK 测试生产aar文件
 
     compile project(':extraLibrary:common')
     compile "com.android.support:appcompat-v7:${rootProject.ext.android["androidSupportVersion"]}"

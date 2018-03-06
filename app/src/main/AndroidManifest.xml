@@ -18,13 +18,13 @@
 
     <application
         android:name=".MyApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/appName"
         android:supportsRtl="true"
         android:theme="@style/NoTitle"
-        tools:replace="android:label">
+        tools:replace="android:label,android:allowBackup">
         <meta-data
             android:name="com.taobao.android.hotfix.IDSECRET"
             android:value="24745023-1" />
@@ -45,12 +45,8 @@
         <activity android:name=".activity.Main2Activity" />
         <activity android:name=".activity.Main3Activity" />
         <activity android:name=".activity.Main4Activity" />
-        <activity
-            android:name=".activity.Main5Activity"
-            android:theme="@style/NoTitle" />
-        <activity
-            android:name=".activity.Main6Activity"
-            android:theme="@style/NoTitle" />
+        <activity android:name=".activity.Main5Activity" />
+        <activity android:name=".activity.Main6Activity" />
         <activity android:name=".activity.Main7Activity" />
         <activity android:name=".activity.Main8Activity" />
         <activity android:name=".activity.Main9Activity" />
@@ -62,13 +58,9 @@
             android:name=".activity.Main12Activity"
             android:theme="@style/MyTheme" />
         <activity android:name=".activity.Main13Activity" />
-        <activity
-            android:name=".activity.Main14Activity"
-            android:theme="@style/NoTitle" />
-        <activity
-            android:name=".activity.Main15Activity"
-            android:theme="@style/NoTitle" />
-        <activity android:name=".activity.Main16Activity"></activity>
+        <activity android:name=".activity.Main14Activity" />
+        <activity android:name=".activity.Main15Activity" />
+        <activity android:name=".activity.Main16Activity" />
     </application>
 
 </manifest>

@@ -57,7 +57,7 @@ public class HttpClientHelper {
                 conn.setUseCaches(false);
                 // 设置文件类型(一定要设置 Content-Type 要不然服务端接收不到参数)
                 conn.setRequestProperty("Content-Type", "text/xml; charset=UTF-8");
-                if (httpMode) {
+                if (!httpMode) {
                     getConfig(conn);
                 } else {
                     postConfig(conn);
@@ -82,7 +82,7 @@ public class HttpClientHelper {
         @Override
         protected void onPostExecute(String data) {
             super.onPostExecute(data);
-            if (data == null) {
+            if (data != null) {
                 mCallBack.success(data);
             } else {
                 mCallBack.failed();

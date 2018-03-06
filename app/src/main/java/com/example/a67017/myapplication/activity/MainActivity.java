@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.example.a67017.myapplication.R;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 //        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE); // 禁止截屏、录屏
         init();
 //        StatusBarUtils.setColor(this, Color.BLUE, 1);
     }
