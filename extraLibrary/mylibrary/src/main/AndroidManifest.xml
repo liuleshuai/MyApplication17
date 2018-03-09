@@ -3,10 +3,9 @@
     package="com.example.mylibrary">
 
     <application
-        android:allowBackup="false"
         android:supportsRtl="true">
         <activity android:name=".LibraryActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>

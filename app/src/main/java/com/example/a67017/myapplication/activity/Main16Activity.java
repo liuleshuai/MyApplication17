@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -32,7 +34,12 @@ public class Main16Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main16);
         ButterKnife.bind(this);
-
+        View viewGroup = findViewById(android.R.id.content);
+        if (viewGroup instanceof LinearLayout) {
+            Toast.makeText(this, "android.R.id.content是LinearLayout类型的", Toast.LENGTH_LONG).show();
+        }else if(viewGroup instanceof FrameLayout){
+            Toast.makeText(this, "android.R.id.content是FrameLayout类型的", Toast.LENGTH_LONG).show();
+        }
     }
 
     @OnClick({R.id.button, R.id.button2, R.id.button3})

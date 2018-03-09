@@ -6,6 +6,7 @@ import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.a67017.myapplication.callback.ActivityLifecycleListener;
 import com.example.common.BaseApplication;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
@@ -23,8 +24,9 @@ import com.taobao.sophix.listener.PatchLoadStatusListener;
 
 public class MyApplication extends BaseApplication {
     private RefWatcher refWatcher;
-    private static MyApplication instance;
+    public static MyApplication instance;
     private String tag = "LK";
+    public static boolean illegal = true;
 
     @Override
     public void onCreate() {
@@ -36,6 +38,8 @@ public class MyApplication extends BaseApplication {
             return;
         }
         refWatcher = LeakCanary.install(this);
+        // 判断App是否运行在前端
+        registerActivityLifecycleCallbacks(new ActivityLifecycleListener());
     }
 
     /**

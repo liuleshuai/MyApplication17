@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.a67017.myapplication.MyApplication;
 import com.example.a67017.myapplication.R;
 import com.example.a67017.myapplication.adapter.PagerAdapter;
 import com.example.a67017.myapplication.bean.FragmentBean;
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private PagerAdapter adapter;
     private FragmentBean fb;
     private List<MyTouchListener> myTouchListeners = new ArrayList<>();
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,5 +179,29 @@ public class MainActivity extends AppCompatActivity {
 
     public interface MyTouchListener {
         public boolean onTouch(MotionEvent event);
+    }
+
+    private long onceTime;
+
+    @Override
+    public void onBackPressed() {
+        if (System.currentTimeMillis() - onceTime < 2000) {
+            MyApplication.illegal = false;
+            super.onBackPressed();
+        } else {
+            onceTime = System.currentTimeMillis();
+            toast = Toast.makeText(this, "再按一次返回键退出！", Toast.LENGTH_LONG);
+            toast.show();
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        if (toast != null) {
+            toast.cancel();
+            toast = null;
+        }
+        Log.d("LK", "onStop!");
+        super.onStop();
     }
 }
