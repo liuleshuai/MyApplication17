@@ -82,6 +82,7 @@ public class PathView extends View {
         canvas.drawPath(dstPath, paint);
     }
 
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
