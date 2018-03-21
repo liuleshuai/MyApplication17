@@ -17,6 +17,7 @@ import com.example.a67017.myapplication.MyApplication;
 import com.example.a67017.myapplication.R;
 import com.example.a67017.myapplication.adapter.PagerAdapter;
 import com.example.a67017.myapplication.bean.FragmentBean;
+import com.example.a67017.myapplication.event.Event1;
 import com.example.a67017.myapplication.fragment.Fragment1;
 import com.example.a67017.myapplication.fragment.Fragment10;
 import com.example.a67017.myapplication.fragment.Fragment11;
@@ -41,6 +42,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import tools.RxBus;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -125,6 +129,13 @@ public class MainActivity extends AppCompatActivity {
                     page.setScaleX(scaleFactor);
                     page.setScaleY(scaleFactor);
                 }
+            }
+        });
+
+        RxBus.getDefault().toFlowable(Event1.class).subscribe(new Consumer<Event1>() {
+            @Override
+            public void accept(@NonNull Event1 event1) throws Exception {
+                Toast.makeText(getApplicationContext(), "事件触发啦！！！！", Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -26,6 +26,7 @@ import butterknife.Unbinder;
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
 /**
@@ -115,12 +116,17 @@ public class Fragment17 extends Fragment {
             public void accept(@NonNull Throwable throwable) throws Exception {
                 Log.e("TAG", "error message:" + throwable.getMessage());
             }
+        }, new Action() {
+            @Override
+            public void run() throws Exception {
+
+            }
         });
     }
 
     public void getWeather() {
         RetrofitLoader weatherLoader = new RetrofitLoader(RetrofitUrl.BASE_WEATHER_URL);
-        weatherLoader.getHeWeather("beijing", "ec56e0cdd08843adacaef248e196855a").subscribe(
+        Disposable disposable = weatherLoader.getHeWeather("beijing", "ec56e0cdd08843adacaef248e196855a").subscribe(
                 new Consumer<WeatherEntity>() {
                     @Override
                     public void accept(@NonNull WeatherEntity weatherEntity) throws Exception {

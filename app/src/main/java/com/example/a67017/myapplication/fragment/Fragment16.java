@@ -168,8 +168,8 @@ public class Fragment16 extends Fragment {
      * 添加
      *******************/
     private void addActivity() {
-        activityList.add("/activity/2", "内存溢出");
-        activityList.add("/activity/3", "内存溢出第三方");
+//        activityList.add("/activity/2", "内存溢出");
+//        activityList.add("/activity/3", "内存溢出第三方");
         activityList.add("/activity/4", "webView浏览器");
         activityList.add("/activity/5", "联动Toolbar");
         activityList.add("/activity/6", "联动+侧边");

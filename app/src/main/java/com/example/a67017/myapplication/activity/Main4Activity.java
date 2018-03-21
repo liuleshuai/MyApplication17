@@ -12,11 +12,13 @@ import android.widget.RelativeLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.a67017.myapplication.R;
+import com.example.a67017.myapplication.event.Event1;
 
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import tools.RxBus;
 
 
 /**
@@ -65,6 +67,7 @@ public class Main4Activity extends AppCompatActivity {
             webView.removeAllViews();
             webView.destroy();
         }
+        RxBus.getDefault().post(new Event1());
         super.onDestroy();
     }
 

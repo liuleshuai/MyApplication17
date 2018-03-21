@@ -33,7 +33,8 @@ public class RetrofitLoader {
      * @return
      */
     public Observable<List<MovieEntity.SubjectsBean>> getMovie(int start, int count) {
-        Observable observable = observe(retrofitService.getTop250(start, count)).map(new Function<MovieEntity, List<MovieEntity.SubjectsBean>>() {
+        Observable observable = observe(retrofitService.getTop250(start, count))
+                .map(new Function<MovieEntity, List<MovieEntity.SubjectsBean>>() {
             @Override
             public List<MovieEntity.SubjectsBean> apply(@NonNull MovieEntity movieEntity) throws Exception {
                 return movieEntity.getSubjects();
