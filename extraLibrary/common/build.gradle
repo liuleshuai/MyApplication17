@@ -69,4 +69,6 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:latest.integration'
     //权限
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+    //eventBus
+    compile 'org.greenrobot:eventbus:3.1.1'
 }
