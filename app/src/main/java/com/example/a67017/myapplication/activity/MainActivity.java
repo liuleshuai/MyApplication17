@@ -1,6 +1,8 @@
 package com.example.a67017.myapplication.activity;
 
 import android.animation.ObjectAnimator;
+import android.app.PictureInPictureParams;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -214,5 +216,14 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.d("LK", "onStop!");
         super.onStop();
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+        if (Build.VERSION.SDK_INT >= 26) {
+            PictureInPictureParams params = new PictureInPictureParams.Builder().build();
+            enterPictureInPictureMode(params);
+        }
     }
 }

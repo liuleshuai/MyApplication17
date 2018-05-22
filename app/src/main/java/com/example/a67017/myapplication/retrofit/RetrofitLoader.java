@@ -1,5 +1,7 @@
 package com.example.a67017.myapplication.retrofit;
 
+import android.util.Log;
+
 import com.example.a67017.myapplication.bean.MovieEntity;
 import com.example.a67017.myapplication.bean.TestBean;
 import com.example.a67017.myapplication.bean.WeatherEntity;
@@ -11,6 +13,7 @@ import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
@@ -50,7 +53,14 @@ public class RetrofitLoader {
     }
 
     public Observable<TestBean> getInfor() {
-        Observable observable = retrofitService.getInfor().compose(this.toMain());
+        Observable observable = retrofitService.getInfor()
+                .doOnNext(new Consumer<TestBean>() {
+                    @Override
+                    public void accept(@NonNull TestBean testBean) throws Exception {
+                        Log.d("LKK", "doOnNext=========" + Thread.currentThread().getName());
+                    }
+                })
+                .compose(this.toMain());
         return observable;
     }
 

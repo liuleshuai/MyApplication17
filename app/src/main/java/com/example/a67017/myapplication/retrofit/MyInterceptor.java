@@ -31,7 +31,7 @@ public class MyInterceptor implements Interceptor {
         return chain.proceed(newRequest);
     }
 
-    static class MyBuilder {
+    public static class MyBuilder {
         MyInterceptor myInterceptor;
 
         MyBuilder() {

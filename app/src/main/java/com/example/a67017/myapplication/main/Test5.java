@@ -6,6 +6,5 @@ package com.example.a67017.myapplication.main;
 
 public class Test5 {
     public static void main(String[] args) {
-        
     }
 }

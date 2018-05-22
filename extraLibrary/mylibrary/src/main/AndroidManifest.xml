@@ -3,9 +3,10 @@
     package="com.example.mylibrary">
 
     <application
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:theme="@style/NoAnimationTheme">
         <activity android:name=".LibraryActivity" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

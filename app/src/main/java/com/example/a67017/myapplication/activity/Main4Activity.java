@@ -48,7 +48,8 @@ public class Main4Activity extends AppCompatActivity {
         webSettings.setSupportZoom(true);
         webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://www.baidu.com/");
+//        webView.loadUrl("file:///android_asset/Html.html");
+        webView.loadUrl("http://www.baidu.com");
     }
 
     @Override

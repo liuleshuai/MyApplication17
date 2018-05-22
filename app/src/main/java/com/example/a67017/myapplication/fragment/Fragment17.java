@@ -151,6 +151,7 @@ public class Fragment17 extends Fragment {
 
             @Override
             public void onNext(TestBean testBean) {
+                Log.d("LKK", "onNext=========" + Thread.currentThread().getName());
                 String s = JSON.toJSONString(testBean);
                 tv.setText(s);
             }

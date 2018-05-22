@@ -44,6 +44,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return super.getItemViewType(position);
+    }
+
+    @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.tv.setText("我想要一台法拉利！");
         holder.iv.setOnClickListener(new View.OnClickListener() {

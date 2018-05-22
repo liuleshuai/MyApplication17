@@ -113,10 +113,10 @@ public class StatusBarUtils {
         int count = decorView.getChildCount();
         //判断是否已经添加了statusBarView
         if (decorView instanceof FrameLayout) {
-            Log.d("LK", "111");
+            Log.d("LK", "111");  // run
         }
         if (decorView.getChildAt(0) instanceof LinearLayout) {
-            Log.d("LK", "222");
+            Log.d("LK", "222");  // run
         }
         if (count > 0 && decorView.getChildAt(count - 1) instanceof StatusBarView) {
             decorView.getChildAt(count - 1).setBackgroundColor(Color.argb(alpha, 0, 0, 0));
