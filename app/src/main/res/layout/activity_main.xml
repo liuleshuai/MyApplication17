@@ -9,7 +9,7 @@
     android:clipChildren="false"
     tools:context="com.example.a67017.myapplication.activity.MainActivity">
 
-    <android.support.v4.view.ViewPager
+    <com.example.a67017.myapplication.customeview.CustomeViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

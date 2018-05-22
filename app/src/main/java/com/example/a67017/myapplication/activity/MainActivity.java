@@ -19,6 +19,7 @@ import com.example.a67017.myapplication.MyApplication;
 import com.example.a67017.myapplication.R;
 import com.example.a67017.myapplication.adapter.PagerAdapter;
 import com.example.a67017.myapplication.bean.FragmentBean;
+import com.example.a67017.myapplication.customeview.CustomeViewPager;
 import com.example.a67017.myapplication.event.Event1;
 import com.example.a67017.myapplication.fragment.Fragment1;
 import com.example.a67017.myapplication.fragment.Fragment10;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.tabHost)
     TabLayout tabHost;
     @BindView(R.id.pager)
-    ViewPager pager;
+    CustomeViewPager pager;
     private PagerAdapter adapter;
     private FragmentBean fb;
     private List<MyTouchListener> myTouchListeners = new ArrayList<>();
@@ -117,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
         linearLayout.setDividerPadding(dip2px(this, 10)); //设置分割线间隔*/
 
         int pageMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16, getResources().getDisplayMetrics());
+        // 设置可以滑动
+        pager.setScoll(true);
         pager.setPageMargin(pageMargin);
         pager.setOffscreenPageLimit(3);
         pager.setPageTransformer(false, new ViewPager.PageTransformer() {
