@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         // 设置可以滑动
         pager.setScoll(true);
         pager.setPageMargin(pageMargin);
-        pager.setOffscreenPageLimit(3);
+        pager.setOffscreenPageLimit(1);
         pager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
             public void transformPage(View page, float position) {

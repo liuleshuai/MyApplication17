@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("LLK", "" + hashCode);
         String a = map.get(hashCode);
         Log.d("LLK", a);
-//        Glide.with(this);
     }
 
     @Override

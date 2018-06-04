@@ -58,6 +58,8 @@ public class ImageAdapter extends ArrayAdapter<String> {
             viewHolder.iv.setImageDrawable(drawable);
         } else {
             viewHolder.iv.setTag(url);
+            // 预设一个图片
+            viewHolder.iv.setImageResource(R.mipmap.ic_launcher);
             BitmapWorkerTask task = new BitmapWorkerTask(viewHolder.iv);
             task.execute(url);
         }

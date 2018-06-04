@@ -37,6 +37,9 @@ public class RetrofitServiceManager {
                 .writeTimeout(DEFAULT_WRITE_TIME_OUT, TimeUnit.SECONDS)
                 .addInterceptor(interceptor);
 //                .addInterceptor(loggingInterceptor);
+
+//        OkHttpClient client = new OkHttpClient().newBuilder().build();
+
         //添加拦截
         if (BuildConfig.LOG_DEBUG) {
             builder.addInterceptor(new LoggingInterceptor());

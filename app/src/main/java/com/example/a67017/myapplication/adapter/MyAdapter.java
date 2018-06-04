@@ -71,7 +71,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return 21;
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    static class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv)
         ImageView iv;
         @BindView(R.id.tv)
