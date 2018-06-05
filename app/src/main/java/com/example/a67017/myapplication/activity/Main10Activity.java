@@ -2,12 +2,16 @@ package com.example.a67017.myapplication.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.a67017.myapplication.R;
 import com.example.a67017.myapplication.customeview.MyDragScrollView;
 import com.example.a67017.myapplication.customeview.VideoLayout;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,4 +49,18 @@ public class Main10Activity extends AppCompatActivity {
             }
         });
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            ExecutorService threadPool = Executors.newFixedThreadPool(4);
+            threadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    
+                }
+            });
+        }
+    };
 }

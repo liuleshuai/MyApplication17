@@ -6,9 +6,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.fastjson.JSON;
 import com.example.a67017.myapplication.R;
 import com.example.a67017.myapplication.adapter.AnimateAdapter;
 import com.example.a67017.myapplication.adapter.MySnapHelper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 
@@ -38,5 +42,43 @@ public class Main18Activity extends AppCompatActivity {
         rv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         MySnapHelper snapHelper = new MySnapHelper();
         snapHelper.attachToRecyclerView(rv);
+        String ss = "{\"name\":\"liukuo\",\"age\":\"18\",\"sex\":\"man\"}";
+        Mine mine = JSON.parseObject(ss, Mine.class);
+        try {
+            JSONObject object = new JSONObject(ss);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        String sss = JSON.toJSONString(mine);
+    }
+
+    static class Mine {
+        private String name;
+        private String age;
+        private String sex;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getAge() {
+            return age;
+        }
+
+        public void setAge(String age) {
+            this.age = age;
+        }
+
+        public String getSex() {
+            return sex;
+        }
+
+        public void setSex(String sex) {
+            this.sex = sex;
+        }
     }
 }
