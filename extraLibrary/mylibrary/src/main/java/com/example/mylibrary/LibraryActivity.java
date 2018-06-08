@@ -9,14 +9,21 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 @Route(path = "/libraryActivity/library")
 public class LibraryActivity extends AppCompatActivity {
+
+
+    @BindView(R2.id.button)
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
-        Button button = (Button) findViewById(R.id.button);
+        ButterKnife.bind(this);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,6 +33,9 @@ public class LibraryActivity extends AppCompatActivity {
         });
         Cat cat = new Cat(2, "green");
         System.out.println(cat.getColor());
+
+//        Executor executor = new ThreadPoolExecutor(4,5,400, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<Runnable>());
+//        Executor executor = Executors.newCachedThreadPool();
     }
 
     public class Cat {

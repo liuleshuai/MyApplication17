@@ -39,6 +39,7 @@ import com.example.a67017.myapplication.fragment.Fragment6;
 import com.example.a67017.myapplication.fragment.Fragment7;
 import com.example.a67017.myapplication.fragment.Fragment8;
 import com.example.a67017.myapplication.fragment.Fragment9;
+import com.example.a67017.myapplication.fragment.PagerFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE); // 禁止截屏、录屏
         init();
 //        StatusBarUtils.setColor(this, Color.BLUE, 1);
+
+//        OutDialog outDialog = new OutDialog(this,R.style.MyDialog);
+//        outDialog.show();
     }
 
     private void init() {
@@ -148,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
     private void addPager() {
         // 方式1：
         fb.add(Fragment16.class, "跳转", R.mipmap.ic_launcher);
+        fb.add(PagerFragment.class, "GreenDao", R.mipmap.ic_launcher);
         fb.add(Fragment13.class, "RxJava+Retrofit", R.mipmap.ic_launcher);
         fb.add(Fragment17.class, "封装RxJava+Retrofit", R.mipmap.ic_launcher);
         fb.add(Fragment1.class, "百分比", R.mipmap.ic_launcher);
@@ -228,5 +233,9 @@ public class MainActivity extends AppCompatActivity {
             PictureInPictureParams params = new PictureInPictureParams.Builder().build();
             enterPictureInPictureMode(params);
         }
+    }
+
+    public void test(){
+        Toast.makeText(this,"success!!!!",Toast.LENGTH_LONG).show();
     }
 }

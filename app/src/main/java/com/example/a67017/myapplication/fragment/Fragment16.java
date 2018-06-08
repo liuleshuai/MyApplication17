@@ -25,6 +25,7 @@ import com.chad.library.adapter.base.callback.ItemDragAndSwipeCallback;
 import com.chad.library.adapter.base.listener.OnItemDragListener;
 import com.chad.library.adapter.base.listener.OnItemSwipeListener;
 import com.example.a67017.myapplication.R;
+import com.example.a67017.myapplication.activity.MainActivity;
 import com.example.a67017.myapplication.adapter.DragAdapter;
 import com.example.a67017.myapplication.adapter.RecyclerAdapter;
 import com.example.a67017.myapplication.bean.JumpBean;
@@ -70,6 +71,7 @@ public class Fragment16 extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         init();
         quickMaker();
+        ((MainActivity)getActivity()).test();
     }
 
     private void dragAndSwipeMaker() {

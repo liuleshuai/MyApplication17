@@ -19,7 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.example.a67017.myapplication.R;
-import com.example.a67017.myapplication.tool.Utils;
+import com.example.a67017.myapplication.tool.dpUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -93,8 +93,8 @@ public class Fragment10 extends Fragment {
         set2 = new AnimatorSet();
         set1 = new AnimatorSet();
         animatorSet = new AnimatorSet();
-        screenWidth = Utils.getScreenWidth(getContext());
-        screenHeight = Utils.getScreenHeight(getContext());
+        screenWidth = dpUtils.getScreenWidth(getContext());
+        screenHeight = dpUtils.getScreenHeight(getContext());
         ViewTreeObserver vto = view.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override

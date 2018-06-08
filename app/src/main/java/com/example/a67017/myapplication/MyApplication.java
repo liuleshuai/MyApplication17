@@ -2,11 +2,14 @@ package com.example.a67017.myapplication;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.a67017.myapplication.callback.ActivityLifecycleListener;
+import com.example.a67017.myapplication.dao.DaoMaster;
+import com.example.a67017.myapplication.dao.DaoSession;
 import com.example.common.BaseApplication;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
@@ -24,13 +27,15 @@ import com.taobao.sophix.listener.PatchLoadStatusListener;
 
 public class MyApplication extends BaseApplication {
     private RefWatcher refWatcher;
-    public static MyApplication instance;
+    private static MyApplication instance;
     private String tag = "LK";
     public static boolean illegal = true;
+    private static DaoSession daoSession;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         initARouter();
         initLogger();
         SophixManager.getInstance().queryAndLoadNewPatch();
@@ -40,6 +45,7 @@ public class MyApplication extends BaseApplication {
         refWatcher = LeakCanary.install(this);
         // 判断App是否运行在前端
         registerActivityLifecycleCallbacks(new ActivityLifecycleListener());
+        setupDatabase();
     }
 
     /**
@@ -81,9 +87,6 @@ public class MyApplication extends BaseApplication {
     }
 
     public static MyApplication getInstance() {
-        if (instance == null) {
-            instance = new MyApplication();
-        }
         return instance;
     }
 
@@ -116,5 +119,16 @@ public class MyApplication extends BaseApplication {
             e.printStackTrace();
         }
         return appVersion;
+    }
+
+    private void setupDatabase() {
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "shop.db", null);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        DaoMaster daoMaster = new DaoMaster(db);
+        daoSession = daoMaster.newSession();
+    }
+
+    public static DaoSession getDaoInstant() {
+        return daoSession;
     }
 }

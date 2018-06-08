@@ -9,7 +9,7 @@ import android.view.WindowManager;
  * @date 2017/11/16
  */
 
-public class Utils {
+public class dpUtils {
     private static float screenWidth;
     private static float screenHeight;
 

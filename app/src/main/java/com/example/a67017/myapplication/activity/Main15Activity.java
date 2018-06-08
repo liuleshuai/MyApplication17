@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.a67017.myapplication.R;
-import com.example.a67017.myapplication.tool.Utils;
+import com.example.a67017.myapplication.tool.dpUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +46,7 @@ public class Main15Activity extends AppCompatActivity {
 
         scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             private int lastScrollY = 0;
-            private int h = Utils.dip2px(Main15Activity.this, 170);
+            private int h = dpUtils.dip2px(Main15Activity.this, 170);
             private int color = ContextCompat.getColor(getApplicationContext(), R.color.colorPrimary) & 0x00ffffff;
 
             @Override

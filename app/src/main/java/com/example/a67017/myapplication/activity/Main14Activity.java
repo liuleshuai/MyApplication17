@@ -11,7 +11,7 @@ import android.webkit.WebViewClient;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.a67017.myapplication.R;
 import com.example.a67017.myapplication.tool.StatusBarUtils;
-import com.example.a67017.myapplication.tool.Utils;
+import com.example.a67017.myapplication.tool.dpUtils;
 import com.github.mmin18.widget.RealtimeBlurView;
 
 import java.util.Locale;
@@ -58,7 +58,7 @@ public class Main14Activity extends AppCompatActivity {
                 super.onPageFinished(view, url);
                 view.loadUrl(String.format(Locale.CHINA,
                         "javascript:document.body.style.paddingTop='%fpx'; void 0",
-                        (float) Utils.px2dip(Main14Activity.this, webView.getPaddingTop()
+                        (float) dpUtils.px2dip(Main14Activity.this, webView.getPaddingTop()
                                 + StatusBarUtils.getStatusBarHeight(Main14Activity.this))
                 ));
             }

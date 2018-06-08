@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 def releaseTime() {
     return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
@@ -103,6 +104,26 @@ android {
     }
 }
 
+//解决支持库版本不兼容问题
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '26.0.2'
+            }
+        }
+    }
+}
+
+//指定生成的文件目录
+greendao {
+    schemaVersion 1
+    targetGenDir 'src/main/java'
+    daoPackage 'com.example.a67017.myapplication.dao'
+
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -128,4 +149,6 @@ dependencies {
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     //路由
     annotationProcessor 'com.alibaba:arouter-compiler:latest.integration'
+    //greendao                  在build.gradle中设置
+    compile "org.greenrobot:greendao:$rootProject.greendaoVersion"
 }
