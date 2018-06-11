@@ -94,7 +94,7 @@ public class MyApplication extends BaseApplication {
         String appVersion = getVersion(this);
         SophixManager.getInstance().setContext(this)
                 .setAppVersion(appVersion)
-                .setAesKey(null)
+                .setAesKey(null)    //用户自定义aes秘钥, 会对补丁包采用对称加密
                 .setEnableDebug(true)
                 .setPatchLoadStatusStub(new PatchLoadStatusListener() {
                     @Override
