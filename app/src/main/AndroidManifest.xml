@@ -27,7 +27,7 @@
         tools:replace="android:label,android:allowBackup,android:theme">
         <meta-data
             android:name="com.taobao.android.hotfix.IDSECRET"
-            android:value="24745023-1" />
+            android:value="24745023" />
         <meta-data
             android:name="com.taobao.android.hotfix.APPSECRET"
             android:value="ad2e96b8ccf494687b25d24399cbbf8a" />

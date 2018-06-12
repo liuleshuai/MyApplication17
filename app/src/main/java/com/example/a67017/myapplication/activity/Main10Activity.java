@@ -9,6 +9,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.a67017.myapplication.R;
 import com.example.a67017.myapplication.customeview.MyDragScrollView;
 import com.example.a67017.myapplication.customeview.VideoLayout;
+import com.example.a67017.myapplication.tool.SafeHandler;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -32,12 +33,18 @@ public class Main10Activity extends AppCompatActivity {
         videoLayout.setMyDragListener(new VideoLayout.OnMyDragListener() {
             @Override
             public void close() {
-                new Handler().postDelayed(new Runnable() {
+                new SafeHandler(Main10Activity.this).postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         finish();
                     }
                 }, 500);
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        finish();
+//                    }
+//                }, 500);
             }
 
             @Override

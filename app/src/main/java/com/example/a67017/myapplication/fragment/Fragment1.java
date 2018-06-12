@@ -52,7 +52,7 @@ public class Fragment1 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fragment1, container, false);
         unbinder = ButterKnife.bind(this, view);
         progress.setLayerType(View.LAYER_TYPE_HARDWARE, null);
-        version.setText(MyUtils.s);
+        version.setText(MyUtils.hi);
 /*        boolean debug = Boolean.valueOf(BuildConfig.debug);
         if (debug) {
             Toast.makeText(getActivity(), "debug!", Toast.LENGTH_SHORT).show();

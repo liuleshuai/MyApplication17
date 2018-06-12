@@ -21,7 +21,7 @@ android {
         minSdkVersion rootProject.ext.android["externalMinSdkVersion"]
         targetSdkVersion rootProject.ext.android["externalTargetSdkVersion"]
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         //使用renderscript 兼容包 高斯模糊
@@ -65,7 +65,7 @@ android {
             //Zipalign优化
             zipAlignEnabled true
             // 移除无用的resource文件
-            shrinkResources true
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //apk命名
             android.applicationVariants.all { variant ->

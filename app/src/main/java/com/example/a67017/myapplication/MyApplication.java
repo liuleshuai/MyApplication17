@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.multidex.MultiDex;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.a67017.myapplication.callback.ActivityLifecycleListener;
@@ -101,10 +102,13 @@ public class MyApplication extends BaseApplication {
                     public void onLoad(int mode, int code, String info, int handlePatchVersion) {
                         if (code == PatchStatus.CODE_LOAD_SUCCESS) {
                             Log.d("LK", "补丁加载成功" + info);
+                            Toast.makeText(instance,"补丁加载成功",Toast.LENGTH_LONG).show();
                         } else if (code == PatchStatus.CODE_LOAD_RELAUNCH) {
                             Log.d("LK", "重新启动" + info);
+                            Toast.makeText(instance,"重新启动",Toast.LENGTH_LONG).show();
 //                            Process.killProcess(Process.myPid());
                         } else {
+                            Toast.makeText(instance,"其他",Toast.LENGTH_LONG).show();
                             Log.d("LK", "其他" + info);
                         }
                     }

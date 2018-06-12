@@ -7,5 +7,6 @@ package com.example.a67017.myapplication.tool;
  */
 
 public class MyUtils {
-    public static String s = "更新后";
+//    public static String s = "更新前";
+    public static String hi = "刘阔，您好！";
 }
