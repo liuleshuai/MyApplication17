@@ -33,12 +33,7 @@ public class Main10Activity extends AppCompatActivity {
         videoLayout.setMyDragListener(new VideoLayout.OnMyDragListener() {
             @Override
             public void close() {
-                new SafeHandler(Main10Activity.this).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        finish();
-                    }
-                }, 500);
+                safeHandler.sendEmptyMessageDelayed(0, 500);
 //                new Handler().postDelayed(new Runnable() {
 //                    @Override
 //                    public void run() {
@@ -56,6 +51,13 @@ public class Main10Activity extends AppCompatActivity {
             }
         });
     }
+
+    private SafeHandler safeHandler = new SafeHandler(Main10Activity.this, new SafeHandler.DisposeHandler() {
+        @Override
+        public void disposeMessage(Message msg) {
+            finish();
+        }
+    });
 
     private Handler handler = new Handler() {
         @Override

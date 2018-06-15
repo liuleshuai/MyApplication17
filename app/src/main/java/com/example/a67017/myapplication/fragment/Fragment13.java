@@ -27,6 +27,7 @@ import butterknife.Unbinder;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -43,11 +44,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment13 extends Fragment {
 
-    @BindView(R.id.tv)
-    TextView tv;
     Unbinder unbinder;
 
     private final String BASE_URL = "https://api.douban.com/v2/movie/";
+    @BindView(R.id.tv)
+    TextView textView;
     @BindView(R.id.bar_layout)
     AppBarLayout barLayout;
     @BindView(R.id.toolbar)
@@ -55,6 +56,7 @@ public class Fragment13 extends Fragment {
     @BindView(R.id.collapsing_toolbar_layout)
     CollapsingToolbarLayout collapsingToolbarLayout;
     private Retrofit retrofit;
+    private Disposable disposable;
 
     public Fragment13() {
         // Required empty public constructor
@@ -95,35 +97,57 @@ public class Fragment13 extends Fragment {
         MovieRetrofit movieRetrofit = retrofit.create(MovieRetrofit.class);
 //        Observable<MovieEntity> observable = movieRetrofit.getTopRx(0, 20);
 
-        movieRetrofit.getTopRx(0, 20).subscribeOn(Schedulers.io())
+        // 使用subscribeWith，disposable可以避免请求网络时突然退出导致的异常。
+        // 在onDestroyView中进行取消订阅。
+        disposable = movieRetrofit.getTopRx(0, 20).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<MovieEntity>() {
-                    private Disposable mDisposable;
-
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        mDisposable = d;
-                    }
-
+                .subscribeWith(new DisposableObserver<MovieEntity>() {
                     @Override
                     public void onNext(MovieEntity movieEntity) {
                         if (movieEntity != null) {
                             /******    Fastjson   ********/
                             String s = JSON.toJSONString(movieEntity);
-                            tv.setText(s);
+                            textView.setText(s);
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        mDisposable.dispose();
+
                     }
 
                     @Override
                     public void onComplete() {
-                        mDisposable.dispose();
+
                     }
                 });
+//                        new Observer<MovieEntity>() {
+//                    private Disposable mDisposable;
+//
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//                        mDisposable = d;
+//                    }
+//
+//                    @Override
+//                    public void onNext(MovieEntity movieEntity) {
+//                        if (movieEntity != null) {
+//                            /******    Fastjson   ********/
+//                            String s = JSON.toJSONString(movieEntity);
+//                            textView.setText(s);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        mDisposable.dispose();
+//                    }
+//
+//                    @Override
+//                    public void onComplete() {
+//                        mDisposable.dispose();
+//                    }
+//                });
     }
 
     private void useRetrofitRxjava2() {
@@ -150,7 +174,7 @@ public class Fragment13 extends Fragment {
                         if (movieEntity != null) {
                             /******    Fastjson   ********/
                             String s = JSON.toJSONString(movieEntity);
-                            tv.setText(s);
+                            textView.setText(s);
                         }
                     }
 
@@ -179,7 +203,7 @@ public class Fragment13 extends Fragment {
                 if (response != null) {
                     /******    Fastjson   ********/
                     String s = JSON.toJSONString(response.body());
-                    tv.setText(s);
+                    textView.setText(s);
                 }
             }
 
@@ -194,5 +218,8 @@ public class Fragment13 extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        if (!disposable.isDisposed()) {
+            disposable.dispose();
+        }
     }
 }

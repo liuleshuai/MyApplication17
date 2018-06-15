@@ -1,5 +1,6 @@
 package com.example.a67017.myapplication.fragment;
 
+import android.animation.AnimatorSet;
 import android.animation.Keyframe;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
@@ -83,12 +84,16 @@ public class Fragment1 extends Fragment {
 //        animator1.setDuration(2000);
 //        animator1.start();
 
+        AnimatorSet animatorSet = new AnimatorSet();
         Keyframe kf1 = Keyframe.ofFloat(0, 0);
         Keyframe kf2 = Keyframe.ofFloat(0.5f, 100);
         Keyframe kf3 = Keyframe.ofFloat(1, 80);
         PropertyValuesHolder pvh = PropertyValuesHolder.ofKeyframe("progress", kf1, kf2, kf3);
         ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(progress, pvh);
-        animator.setDuration(2000);
-        animator.start();
+
+        ObjectAnimator animator1 = ObjectAnimator.ofFloat(progress, "TranslationY", 200, 0);
+        animatorSet.playTogether(animator,animator1);
+        animatorSet.setDuration(2000);
+        animatorSet.start();
     }
 }
