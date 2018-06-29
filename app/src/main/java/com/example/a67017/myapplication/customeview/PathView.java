@@ -55,6 +55,9 @@ public class PathView extends View {
         path = new Path();
         dstPath = new Path();
         pathMeasure = new PathMeasure();
+        path.addCircle(getWidth() / 2, getWidth() / 2, getWidth() / 2 - 10, Path.Direction.CW);
+        pathMeasure.setPath(path, true);
+        total = pathMeasure.getLength();
 
         ValueAnimator animator = ValueAnimator.ofFloat(0, 1);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -74,9 +77,6 @@ public class PathView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        path.addCircle(getWidth() / 2, getWidth() / 2, getWidth() / 2 - 10, Path.Direction.CW);
-        pathMeasure.setPath(path, true);
-        total = pathMeasure.getLength();
         dstPath.reset();
         pathMeasure.getSegment(start, stop, dstPath, true);
         canvas.drawPath(dstPath, paint);
