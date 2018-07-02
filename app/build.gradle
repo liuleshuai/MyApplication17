@@ -151,4 +151,6 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:latest.integration'
     //greendao                  在build.gradle中设置
     compile "org.greenrobot:greendao:$rootProject.greendaoVersion"
+    //glide v4
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 }

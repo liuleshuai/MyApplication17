@@ -15,7 +15,6 @@ import butterknife.ButterKnife;
 @Route(path = "/libraryActivity/library")
 public class LibraryActivity extends AppCompatActivity {
 
-
     @BindView(R2.id.button)
     Button button;
 

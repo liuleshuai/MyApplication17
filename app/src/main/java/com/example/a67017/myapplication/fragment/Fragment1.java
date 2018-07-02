@@ -60,7 +60,7 @@ public class Fragment1 extends Fragment {
         } else {
             Toast.makeText(getActivity(), "not debug!", Toast.LENGTH_SHORT).show();
         }*/
-        int layoutId = getResources().getIdentifier("activity_main", "layout", getActivity().getPackageName());
+        int layoutId = getResources().getIdentifier("syj_activity_main", "layout", getActivity().getPackageName());
         Log.d("LK", "----> 获取到的资源 layoutId = " + layoutId);
         return view;
     }

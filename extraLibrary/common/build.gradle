@@ -71,7 +71,8 @@ dependencies {
     //权限
     compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     //glide
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     //eventBus
     compile 'org.greenrobot:eventbus:3.1.1'
 }
