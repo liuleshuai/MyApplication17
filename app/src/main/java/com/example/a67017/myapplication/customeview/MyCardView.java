@@ -48,6 +48,8 @@ public class MyCardView extends AppCompatImageView {
 
     private void init(Context context, AttributeSet attrs) {
 /*        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MyCardViewStyle);
+        int b = a.getInt(R.styleable.MyCardViewStyle_backColor, R.color.black);
+        String c = a.getString(R.styleable.MyCardViewStyle_name);
         a.recycle();*/
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);// 关闭硬件加速加速

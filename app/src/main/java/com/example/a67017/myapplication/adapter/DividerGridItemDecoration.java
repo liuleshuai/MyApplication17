@@ -18,7 +18,7 @@ import com.example.a67017.myapplication.R;
 
 public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
 
-    private static final int[] ATTS = new int[]{android.R.attr.listDivider};
+//    private static final int[] ATTS = new int[]{android.R.attr.listDivider};
     private Drawable mDivider;
 
     public DividerGridItemDecoration(Context context) {

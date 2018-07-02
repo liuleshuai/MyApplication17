@@ -1,5 +1,6 @@
 package com.example.mylibrary;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -32,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         int hashCode = s.hashCode();
         Log.d("LLK", "" + hashCode);
-        String a = map.get(hashCode);
-        Log.d("LLK", a);
+        Log.d("LKK", Build.VERSION.SDK_INT + "");
     }
 
     @Override
