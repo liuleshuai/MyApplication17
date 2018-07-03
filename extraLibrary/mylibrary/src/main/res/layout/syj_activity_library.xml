@@ -21,5 +21,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv"
-        android:text="button" />
+        android:text="JUMP" />
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/slide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="slide" />
+
+        <Button
+            android:id="@+id/autoTransition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="autoTransition" />
+    </LinearLayout>
+
 </RelativeLayout>
