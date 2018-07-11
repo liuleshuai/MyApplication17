@@ -208,12 +208,13 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (System.currentTimeMillis() - onceTime < 2000) {
             MyApplication.illegal = false;
+            toast = Toast.makeText(this, "双击退出！", Toast.LENGTH_LONG);
             super.onBackPressed();
         } else {
             onceTime = System.currentTimeMillis();
             toast = Toast.makeText(this, "再按一次返回键退出！", Toast.LENGTH_LONG);
-            toast.show();
         }
+        toast.show();
     }
 
     @Override

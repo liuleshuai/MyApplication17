@@ -34,6 +34,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:${rootProject.ext.android["androidSupportVersion"]}"
     testCompile 'junit:junit:4.12'
     compile "com.android.support:design:${rootProject.ext.android["androidSupportVersion"]}"
+    compile 'com.android.support.constraint:constraint-layout:latest.integration'
     compile 'com.squareup.okhttp3:okhttp:3.9.1'
     compile 'top.zibin:Luban:latest.integration'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:latest.integration'

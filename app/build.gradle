@@ -39,6 +39,10 @@ android {
         packagingOptions {
             exclude 'META-INF/rxjava.properties'
         }
+
+        jackOptions{
+            enabled true
+        }
     }
 
     productFlavors {
@@ -101,6 +105,11 @@ android {
         flatDir {
             dirs 'libs'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

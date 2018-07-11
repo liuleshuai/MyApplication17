@@ -1,9 +1,12 @@
 package com.example.a67017.myapplication.activity;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSON;
@@ -24,6 +27,8 @@ public class Main18Activity extends AppCompatActivity {
 
     @BindView(R.id.rv)
     RecyclerView rv;
+    @BindView(R.id.tv)
+    TextView tv;
 
     private Integer[] images = {R.mipmap.jdzz, R.mipmap.ccdzz, R.mipmap.dfh,
             R.mipmap.dlzs, R.mipmap.sgkptt, R.mipmap.ttxss, R.mipmap.zmq, R.mipmap.zzhx};
@@ -50,6 +55,18 @@ public class Main18Activity extends AppCompatActivity {
             e.printStackTrace();
         }
         String sss = JSON.toJSONString(mine);
+        CountDownTimer countDownTimer = new CountDownTimer(5000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                tv.setText((int)millisUntilFinished/1000 + "s");
+            }
+
+            @Override
+            public void onFinish() {
+                tv.setVisibility(View.GONE);
+            }
+        };
+        countDownTimer.start();
     }
 
     static class Mine {

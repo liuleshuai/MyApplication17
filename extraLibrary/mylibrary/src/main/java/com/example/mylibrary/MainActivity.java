@@ -3,14 +3,18 @@ package com.example.mylibrary;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.ImageViewTarget;
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R2.id.img)
     ImageView imageView;
+    @BindView(R2.id.activity_main)
+    RelativeLayout activityMain;
 
 
     @Override
@@ -70,6 +76,12 @@ public class MainActivity extends AppCompatActivity {
                 });
 //        GlideApp.with(this).asBitmap().load(url).placeholder(R.drawable.ic_launcher).into(imageView);
 
+    }
+
+    public void jump(View view) {
+        ActivityOptionsCompat compat = ActivityOptionsCompat.
+                makeScaleUpAnimation(activityMain, activityMain.getWidth() / 2, activityMain.getHeight() / 2, 0, 0);
+        ARouter.getInstance().build("/libraryActivity/broadcast").withOptionsCompat(compat).navigation();
     }
 
     @Override

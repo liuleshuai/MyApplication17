@@ -14,4 +14,16 @@
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/countdown"
+        android:gravity="center"
+        android:text="1s"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 </RelativeLayout>
