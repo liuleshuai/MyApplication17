@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public interface MyTouchListener {
-        public boolean onTouch(MotionEvent event);
+        boolean onTouch(MotionEvent event);
     }
 
     private long onceTime;
