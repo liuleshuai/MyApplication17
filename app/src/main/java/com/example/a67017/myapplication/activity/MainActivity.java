@@ -1,10 +1,14 @@
 package com.example.a67017.myapplication.activity;
 
+import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.app.PictureInPictureParams;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,6 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.a67017.myapplication.MyApplication;
@@ -39,26 +44,36 @@ import com.example.a67017.myapplication.fragment.Fragment6;
 import com.example.a67017.myapplication.fragment.Fragment7;
 import com.example.a67017.myapplication.fragment.Fragment8;
 import com.example.a67017.myapplication.fragment.Fragment9;
+import com.example.a67017.myapplication.fragment.PagerFragment;
+import com.example.common.tools.RxBus;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
-import tools.RxBus;
+import io.reactivex.functions.Function;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.tabHost)
-    TabLayout tabHost;
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
     @BindView(R.id.pager)
     CustomeViewPager pager;
+    @BindView(R.id.activity_main)
+    LinearLayout activityMain;
     private PagerAdapter adapter;
     private FragmentBean fb;
     private List<MyTouchListener> myTouchListeners = new ArrayList<>();
     private Toast toast;
+    private List<String> permissionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,15 +84,56 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE); // 禁止截屏、录屏
         init();
 //        StatusBarUtils.setColor(this, Color.BLUE, 1);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            checkPermission();
+        }
+        test();
+    }
+
+    private void checkPermission() {
+        String[] permissions = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
+        permissionList = new ArrayList<>();
+        for (String item : permissions) {
+            if (ContextCompat.checkSelfPermission(this, item) != PackageManager.PERMISSION_GRANTED) {
+                permissionList.add(item);
+            }
+        }
+        if (!permissionList.isEmpty()) {
+            String[] requestPermissions = permissionList.toArray(new String[permissionList.size()]);
+            ActivityCompat.requestPermissions(this, requestPermissions, 0);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @android.support.annotation.NonNull String[] permissions, @android.support.annotation.NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 0:
+                for (int i = 0; i < grantResults.length; i++) {
+                    if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, permissions[i])) {
+                            ActivityCompat.requestPermissions(this, new String[]{permissions[i]}, 0);
+                        } else {
+                            Toast.makeText(MainActivity.this, "您已禁止授予权限！", Toast.LENGTH_SHORT).show();
+                        }
+                        return;
+                    }
+                }
+                // do something
+
+                break;
+            default:
+                break;
+        }
     }
 
     private void init() {
         fb = new FragmentBean();
         addPager();
         if (fb.getCount() > 5) {
-            tabHost.setTabMode(TabLayout.MODE_SCROLLABLE);
+            tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         } else {
-            tabHost.setTabMode(TabLayout.MODE_FIXED);
+            tabLayout.setTabMode(TabLayout.MODE_FIXED);
         }
         if (fb.getImages() == null) {
             adapter = new PagerAdapter(this, getSupportFragmentManager(), fb.getFragmentClass(), fb.getFragmentTitle());
@@ -85,14 +141,14 @@ public class MainActivity extends AppCompatActivity {
             adapter = new PagerAdapter(this, getSupportFragmentManager(), fb.getFragmentClass(), fb.getFragmentTitle(), fb.getImages());
         }
         pager.setAdapter(adapter);
-        tabHost.setupWithViewPager(pager);
+        tabLayout.setupWithViewPager(pager);
         for (int i = 0; i < adapter.getCount(); i++) {
-            TabLayout.Tab tab = tabHost.getTabAt(i);
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
             if (tab != null) {
                 tab.setCustomView(adapter.getTabView(i));
             }
         }
-        tabHost.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 ImageView iv = tab.getCustomView().findViewById(R.id.iv);
@@ -148,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
     private void addPager() {
         // 方式1：
         fb.add(Fragment16.class, "跳转", R.mipmap.ic_launcher);
+        fb.add(PagerFragment.class, "null", R.mipmap.ic_launcher);
         fb.add(Fragment13.class, "RxJava+Retrofit", R.mipmap.ic_launcher);
         fb.add(Fragment17.class, "封装RxJava+Retrofit", R.mipmap.ic_launcher);
         fb.add(Fragment1.class, "百分比", R.mipmap.ic_launcher);
@@ -228,5 +285,42 @@ public class MainActivity extends AppCompatActivity {
             PictureInPictureParams params = new PictureInPictureParams.Builder().build();
             enterPictureInPictureMode(params);
         }
+    }
+
+    public void test(){
+        Log.d("syj","lklklklklk");
+        final String[] letters = new String[]{"A", "B", "C", "D", "E", "F", "G", "H"};
+        Observable<String> letterSequence = Observable.interval(1000, TimeUnit.MILLISECONDS)
+                .map(new Function<Long, String>() {
+                    @Override
+                    public String apply(Long position) throws Exception {
+                        return letters[position.intValue()];
+                    }
+                }).take(letters.length);
+        Log.d("syj","lklklklklk");
+        Observable<Long> numberSequence = Observable.interval(2000, TimeUnit.MILLISECONDS).take(5);
+
+        Observable.merge(letterSequence, numberSequence)
+                .subscribe(new Observer<Serializable>() {
+                    @Override
+                    public void onError(Throwable e) {
+                        System.out.println("Error:" + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(Serializable serializable) {
+                        Log.d("syj",serializable.toString()+" ");
+                    }
+                });
     }
 }

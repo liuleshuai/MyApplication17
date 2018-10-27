@@ -72,7 +72,7 @@ public class Fragment4 extends Fragment {
             @Override
             public void run() {
                 try {
-                    MyOkHttp.getHttp(new URL("http://www.baidu.com/"), new MyOkHttp.ResponseListener() {
+                    MyOkHttp.getInstance().getHttp(new URL("http://www.baidu.com/"), new MyOkHttp.ResponseListener() {
                         @Override
                         public void success(final String json) {
                             text.setText(json);

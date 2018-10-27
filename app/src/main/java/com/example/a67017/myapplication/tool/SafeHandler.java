@@ -39,22 +39,10 @@ public class SafeHandler extends Handler {
         }
     }
 
-    public static Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-            disposeHandler.disposeRunnable();
-        }
-    };
-
     public interface DisposeHandler {
         /**
          * 处理handleMessage中的回调
          */
         void disposeMessage(Message msg);
-
-        /**
-         * 处理Runnable中的回调
-         */
-        void disposeRunnable();
     }
 }

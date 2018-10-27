@@ -46,7 +46,7 @@ public class Main16Activity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.button:
-                HttpClientHelper.execute("http://www.wanandroid.com/tools/mockapi/2748/lk", false, null, new HttpClientHelper.HttpResult() {
+                HttpClientHelper.execute("http://www.wanandroid.com/com.example.common.tools/mockapi/2748/lk", false, null, new HttpClientHelper.HttpResult() {
                     @Override
                     public void success(String data) {
                         Toast.makeText(Main16Activity.this, data, Toast.LENGTH_LONG).show();

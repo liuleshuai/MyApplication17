@@ -1,4 +1,4 @@
-package tools;
+package com.example.common.tools;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -4,16 +4,20 @@ import android.animation.Keyframe;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a67017.myapplication.R;
 import com.example.a67017.myapplication.customeview.ProgressView;
+import com.example.a67017.myapplication.tool.DownLoadUtil;
 import com.example.a67017.myapplication.tool.MyUtils;
 
 import butterknife.BindView;
@@ -34,6 +38,12 @@ public class Fragment1 extends Fragment {
     ProgressView progress;
     @BindView(R.id.version)
     TextView version;
+    @BindView(R.id.download)
+    AppCompatButton download;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+    @BindView(R.id.number)
+    TextView number;
     // TODO: Rename parameter arguments, choose names that match
 
     public Fragment1() {
@@ -53,15 +63,38 @@ public class Fragment1 extends Fragment {
         unbinder = ButterKnife.bind(this, view);
         progress.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         version.setText(MyUtils.s);
-/*        boolean debug = Boolean.valueOf(BuildConfig.debug);
-        if (debug) {
-            Toast.makeText(getActivity(), "debug!", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getActivity(), "not debug!", Toast.LENGTH_SHORT).show();
-        }*/
+
+        download.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String saveDir = getAppDir();
+                String url = "http://dl001.liqucn.com/upload/2013/dongzuo/ditiepaoku_1.0_liqucn.com.apk";
+                DownLoadUtil.getInstance().downLoad(getActivity(), url, saveDir, new DownLoadUtil.DownloadListener() {
+                    @Override
+                    public void onDownloadSuccess() {
+                        Toast.makeText(getActivity(), "下载成功", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onDownloading(int progress) {
+                        progressBar.setProgress(progress);
+                        number.setText(progress + "%");
+                    }
+
+                    @Override
+                    public void onDownloadFailed() {
+                        Toast.makeText(getActivity(), "下载失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
         int layoutId = getResources().getIdentifier("activity_main", "layout", getActivity().getPackageName());
         Log.d("LK", "----> 获取到的资源 layoutId = " + layoutId);
         return view;
+    }
+
+    private String getAppDir() {
+        return Environment.getExternalStorageDirectory().getAbsolutePath();
     }
 
     @Override

@@ -7,6 +7,8 @@
         android:theme="@style/NoAnimationTheme">
         <activity android:name=".LibraryActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".JumpActivity" />
+        <activity android:name=".BroadcastActivity"></activity>
     </application>
 
 </manifest>

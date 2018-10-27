@@ -2,9 +2,15 @@ package com.example.a67017.myapplication.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ListView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.a67017.myapplication.R;
 import com.example.a67017.myapplication.adapter.ImageAdapter;
 
@@ -87,6 +93,23 @@ public class Main17Activity extends AppCompatActivity {
         ButterKnife.bind(this);
         ImageAdapter adapter = new ImageAdapter(this, 0, imageUrls);
         listView.setAdapter(adapter);
-    }
 
+        RequestQueue volley = Volley.newRequestQueue(this);
+        StringRequest request = new StringRequest("http://www.baidu.com",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("TAG", response);
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("TAG", error.getMessage(), error);
+            }
+        });
+        request.setShouldCache(false);
+        volley.add(request);
+
+    }
 }

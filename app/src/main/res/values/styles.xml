@@ -23,6 +23,17 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!--启动页-->
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        // 去除白屏/黑屏
+        <item name="android:windowBackground">@mipmap/beauty</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowAnimationStyle">@style/SlideAnimationStyle</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
     <!--透明背景Activity-->
     <style name="TransparentTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -35,8 +46,10 @@
 
     <style name="MyTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowContentTransitions" tools:targetApi="lollipop">true</item>
-        <item name="android:windowAllowEnterTransitionOverlap" tools:targetApi="lollipop">false</item>
-        <item name="android:windowAllowReturnTransitionOverlap" tools:targetApi="lollipop">false</item>
+        <item name="android:windowAllowEnterTransitionOverlap" tools:targetApi="lollipop">false
+        </item>
+        <item name="android:windowAllowReturnTransitionOverlap" tools:targetApi="lollipop">false
+        </item>
     </style>
 
     <!--屏蔽Activity进出动画-->

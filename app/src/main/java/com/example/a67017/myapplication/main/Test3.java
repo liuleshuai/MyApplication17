@@ -14,13 +14,6 @@ public class Test3 {
         String ss = "2017-3-08";
         String a = getFormatDate(ss, "yyyyMMdd");
         System.out.println(a);
-
-/*        Stack<String> aa = new Stack<>();
-        aa.push("111");
-        aa.push("w222");
-        for (String temp : aa) {
-            System.out.println(temp);
-        }*/
     }
 
     public static String getFormatDate(String text, String formatType) {

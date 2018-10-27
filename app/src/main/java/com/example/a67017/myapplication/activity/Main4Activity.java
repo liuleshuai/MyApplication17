@@ -13,12 +13,12 @@ import android.widget.RelativeLayout;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.a67017.myapplication.R;
 import com.example.a67017.myapplication.event.Event1;
+import com.example.common.tools.RxBus;
 
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import tools.RxBus;
 
 
 /**

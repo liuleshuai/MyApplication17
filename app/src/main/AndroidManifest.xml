@@ -37,6 +37,8 @@
 
         <activity
             android:name=".activity.MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:theme="@style/SplashTheme"
             android:supportsPictureInPicture="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,6 +46,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--<activity android:name=".activity.MainActivity" />-->
         <activity android:name=".activity.Main2Activity" />
         <activity android:name=".activity.Main3Activity" />
         <activity android:name=".activity.Main4Activity" />
@@ -64,7 +67,7 @@
         <activity android:name=".activity.Main15Activity" />
         <activity android:name=".activity.Main16Activity" />
         <activity android:name=".activity.Main17Activity" />
-        <activity android:name=".activity.Main18Activity"></activity>
+        <activity android:name=".activity.Main18Activity"/>
     </application>
 
 </manifest>

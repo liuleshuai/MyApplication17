@@ -18,7 +18,7 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
     }
@@ -30,9 +30,6 @@ android {
             minifyEnabled false
             //Zipalign优化
             zipAlignEnabled true
-
-            // 移除无用的resource文件
-            shrinkResources true
             //前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -40,9 +37,13 @@ android {
             buildConfigField "boolean", "LOG_DEBUG", "true"
             minifyEnabled false
             zipAlignEnabled false
-            shrinkResources false
         }
     }
+
+    dataBinding {
+        enabled = true;
+    }
+
     sourceSets {
         main {
             if (isModule.toBoolean()) {
@@ -61,15 +62,20 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile project(':extraLibrary:common')
-    compile "com.android.support:appcompat-v7:${rootProject.ext.android["androidSupportVersion"]}"
+    api project(':extraLibrary:common')
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.android["androidSupportVersion"]}"
     // 路由跳转
-    compile 'com.android.support:support-v4:26.0.0-alpha1'
-    testCompile 'junit:junit:4.12'
+    implementation "com.android.support:support-v4:${rootProject.ext.android["androidSupportVersion"]}"
+    testImplementation 'junit:junit:4.12'
+    //butterKnife
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //ARouter
     annotationProcessor 'com.alibaba:arouter-compiler:latest.integration'
 }
 apply from: 'maven-release-aar.gradle'

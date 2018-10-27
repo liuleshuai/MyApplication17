@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+//使用greendao
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion rootProject.ext.android["externalCompileSdkVersion"]
@@ -14,63 +16,86 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
     }
+
+    //greendao配置
+    greendao {
+        //版本号，升级时可配置
+        schemaVersion 1
+        //dao的包名，包名默认是entity所在的包
+        daoPackage 'com.example.common.dao'
+        //生成数据库文件的目录
+        targetGenDir 'src/main/java'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true;
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile "com.android.support:appcompat-v7:${rootProject.ext.android["androidSupportVersion"]}"
-    testCompile 'junit:junit:4.12'
-
-    compile 'com.squareup.okhttp3:okhttp:3.9.1'
-    compile 'top.zibin:Luban:latest.integration'
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:latest.integration'
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.android["androidSupportVersion"]}"
+    testImplementation 'junit:junit:4.12'
+    api files('libs/volley.jar')
+    // 组件化Architecture Components
+    api 'android.arch.lifecycle:runtime:1.1.1'
+    api 'android.arch.lifecycle:extensions:1.1.1'
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+    api 'com.squareup.okhttp3:okhttp:3.9.1'
+    api 'top.zibin:Luban:latest.integration'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.41'
     //高斯模糊
-    compile 'com.github.pinguo-zhouwei:EasyBlur:v1.0.0'
+    api 'com.github.pinguo-zhouwei:EasyBlur:v1.0.0'
     // 毛玻璃
-    compile 'com.github.mmin18:realtimeblurview:1.0.6'
+    api 'com.github.mmin18:realtimeblurview:1.0.6'
     //retrofit
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    api 'com.squareup.retrofit2:retrofit:2.3.0'
     //下面两个是RxJava2 和RxAndroid
-    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
+    api 'io.reactivex.rxjava2:rxjava:2.0.7'
     //用于Android开发,拓展RxJava功能，添加了 Android 用的接口
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //转换器，请求结果转换成Model
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    api 'com.squareup.retrofit2:converter-gson:2.3.0'
     //配合retrofit使用
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    api 'com.squareup.okhttp3:logging-interceptor:3.3.1'
     //RxBinding（支持RxJava2的版本）
-    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.0.0'
+    api 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    api 'com.jakewharton.rxbinding2:rxbinding-support-v4:2.0.0'
+    api 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
+    api 'com.jakewharton.rxbinding2:rxbinding-design:2.0.0'
+    api 'com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.0.0'
     //Log打印
-    compile 'com.orhanobut:logger:latest.integration'
-    compile 'com.google.code.gson:gson:2.6.2'
-    compile 'com.alibaba:fastjson:latest.integration'
-    compile 'com.umeng.analytics:analytics:latest.integration'
-    compile 'com.aliyun.ams:alicloud-android-hotfix:3.1.8'
+    api 'com.orhanobut:logger:latest.integration'
+    api 'com.google.code.gson:gson:2.6.2'
+    api 'com.alibaba:fastjson:latest.integration'
+    api 'com.umeng.analytics:analytics:latest.integration'
+    //热修复
+    api 'com.aliyun.ams:alicloud-android-hotfix:latest.integration'
     //路由
-    compile 'com.alibaba:arouter-api:latest.integration'
+    api 'com.alibaba:arouter-api:latest.integration'
     annotationProcessor 'com.alibaba:arouter-compiler:latest.integration'
     //权限
-    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+    api 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
     //glide
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    api 'com.github.bumptech.glide:glide:3.7.0'
     //eventBus
-    compile 'org.greenrobot:eventbus:3.1.1'
+    api 'org.greenrobot:eventbus:3.1.1'
+    //greendao
+    api 'org.greenrobot:greendao:3.2.2'
+    // lottie
+    api 'com.airbnb.android:lottie:2.5.5'
 }
