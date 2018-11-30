@@ -1,10 +1,12 @@
 package com.example.mylibrary;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.common.BaseApplication;
 import com.example.common.dao.GdUser;
+import com.example.common.dao.GdUserDao;
 import com.example.common.tools.GdUserUtil;
+
+import org.greenrobot.greendao.query.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +58,7 @@ public class JumpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 GdUser user = new GdUser();
                 user.setName(name.getText().toString());
-                user.setAge(age.getText().toString());
+                user.setAge(Integer.parseInt(age.getText().toString()));
                 GdUserUtil.insertData(user);
                 refrushList();
             }
@@ -61,8 +67,10 @@ public class JumpActivity extends AppCompatActivity {
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GdUserUtil.removeData(list.get(0).getId());
-                refrushList();
+                /*GdUserUtil.removeData(list.get(0).getId());
+                refrushList();*/
+                List<GdUser> query = BaseApplication.getDaoSession().getGdUserDao().queryBuilder().orderDesc(GdUserDao.Properties.Age).limit(1).list();
+                Log.d("LK", query.get(0).getAge() + "");
             }
         });
         update = findViewById(R.id.update);
@@ -105,7 +113,7 @@ public class JumpActivity extends AppCompatActivity {
         public void onBindViewHolder(Holder holder, int position) {
             holder.id.setText(String.valueOf(list.get(position).getId()));
             holder.name.setText(list.get(position).getName());
-            holder.age.setText(list.get(position).getAge());
+            holder.age.setText(list.get(position).getAge() + "");
         }
 
         @Override

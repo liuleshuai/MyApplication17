@@ -9,7 +9,7 @@ import java.util.List;
 
 public class GdUserUtil {
 
-    private static GdUserDao getDao() {
+    public static GdUserDao getDao() {
         DaoSession session = BaseApplication.getDaoSession();
         GdUserDao dao = session.getGdUserDao();
         return dao;
